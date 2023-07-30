@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Regular
+comment1.params=enrollmentID\ dateOfBirth\ courseName\ studentName\ dateOfEnrollment\ courseDuration\ tuitionFee\ numOfModules\ numOfCreditHours\ daysPresent
+comment1.target=Regular(int,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ int,\ int,\ int,\ double)
+comment2.params=
+comment2.target=int\ getNumOfModules()
+comment3.params=
+comment3.target=int\ getNumOfCreditHours()
+comment4.params=
+comment4.target=double\ getDaysPresent()
+comment5.params=
+comment5.target=boolean\ getIsGrantedScholarship()
+comment6.params=isGrantedScholarship
+comment6.target=void\ setIsGrantedScholarship(boolean)
+comment7.params=
+comment7.target=java.lang.String\ presentPercentage()
+comment8.params=courseName\ enrollmentId\ dateOfEnrollment
+comment8.target=java.lang.String\ grantCertificate(java.lang.String,\ int,\ java.lang.String)
+comment9.params=
+comment9.target=java.lang.String\ display()
+numComments=10
