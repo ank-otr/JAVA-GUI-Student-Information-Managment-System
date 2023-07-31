@@ -2,8 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-import javax.swing.border.Border;
-import javax.swing.UIManager;
+
 
 
 public class StudentGUI implements ActionListener{
@@ -384,6 +383,7 @@ public class StudentGUI implements ActionListener{
         addR = new JButton();
         addR.setText("Add Student");
         addR.setBounds(150,100,150,50);
+        addR.addActionListener(this);
         
         addR.setForeground(new Color(66,133,244)); // Set the text color to make it visible on the blue background
         
@@ -482,7 +482,6 @@ public class StudentGUI implements ActionListener{
         gui.StudentGUI();
     }
     public void actionPerformed(ActionEvent e){
-        
         //For Switching between Regular Student and Dropout Student
         boolean a;
         
@@ -629,6 +628,19 @@ public class StudentGUI implements ActionListener{
         String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
         
         String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
+        
+        boolean b;
+        
+        if (e.getSource() == addR){
+            if(iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0){
+                JOptionPane.showMessageDialog(newFrame, "Error: Empty Feilds!","Fill Up",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                b = true;
+                
+            }
+        }
+        
         
     }
 }
