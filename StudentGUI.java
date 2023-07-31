@@ -483,8 +483,9 @@ public class StudentGUI implements ActionListener{
     }
     public void actionPerformed(ActionEvent e){
         
+        //For Switching between Regular Student and Dropout Student
         boolean a;
-        //For Switching between Regular Student and Dropout Student 
+        
         if(toggleMenu.isSelected()){
             a = true;
           
