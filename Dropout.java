@@ -4,6 +4,8 @@ public class Dropout extends Student {
       private String dateOfDropout;
       private int remainingAmount;
       private boolean hasPaid;
+      private boolean added;
+      private boolean removed;
 
     public Dropout(String studentName, int courseDuration, int tuitionFee, int numOfRemainingModules, 
     int numOfMonthsAttended, String dateOfDropout, int enrollmentID, String courseName, String dateOfEnrollment, String dateOfBirth ) 
@@ -42,6 +44,13 @@ public class Dropout extends Student {
         return hasPaid;
     }
     
+    public boolean getAdded(){
+        return added;
+    }
+    
+    public boolean getRemoved(){
+        return removed;
+    }
    //mutator methods
     public void setDateOfDropout(String dateOfDropout){
         this.dateOfDropout = dateOfDropout;
@@ -61,16 +70,24 @@ public class Dropout extends Student {
     
     
     // creating billsPayable method to calculate the pending tuition fee amount.
-    public double  billsPayable() {
-    remainingAmount = (super.getCourseDuration() - numOfMonthsAttended) * (super.getTuitionFee()/super.getCourseDuration());
-    hasPaid = true;
-    return remainingAmount; 
- 
+    public void billsPayable() {
+    if(removed == true){ 
+        System.out.println("Student information missing!");
+    }else{
+        remainingAmount = (super.getCourseDuration() - numOfMonthsAttended) * (super.getTuitionFee()/super.getCourseDuration());
+        hasPaid = true;
+        System.out.println(remainingAmount); 
+         
+    }
+    
 }
 
     
     //crating removeStudent method
     public void removeStudent(){
+    if(removed == true){
+        System.out.println("Student information missing!");
+    }else{
         if (hasPaid) {
         setDateOfBirth("");
         setCourseName("");
@@ -84,18 +101,25 @@ public class Dropout extends Student {
         setNumOfMonthsAttended(0);
         setRemainingAmount(0);
         } 
-    else {
-        System.out.println("All bills not cleared");
+        else {
+             System.out.println("All bills not cleared");
+        }
     }
-    }
+}
     
     //display method
-     public String display(){
-    String studentInfo = super.display(); // get basic student information from the Student class
-    String dropoutInfo = "\n" +"Number of Remaining Modules: " + numOfRemainingModules + "\n" +
+     public void display(){
+    super.display(); // get basic student information from the Student class
+    if(added == true){
+        
+    
+    System.out.println("\n" +"Number of Remaining Modules: " + numOfRemainingModules + "\n" +
                          "Number of Months Attended: " + numOfMonthsAttended + "\n" +
                          "Date of Drop Out: " + dateOfDropout + "\n"+
-                         "Remaning Amount: " + remainingAmount + "\n"; // additional information specific to Dropout class
-    return studentInfo + dropoutInfo; // combine basic student information and Dropout class information
+                         "Remaning Amount: " + remainingAmount + "\n"); // additional information specific to Dropout class
+ }else{
+     System.out.println("Dropout Student has not been added");
+ }
+                        
 }
 }

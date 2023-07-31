@@ -21,9 +21,12 @@ public class StudentGUI implements ActionListener{
     
     
     
-    ArrayList<Student> alist = new ArrayList<Student>();
-    private Regular rObject;
-    private Dropout dObject;
+    ArrayList<Student> arrList = new ArrayList<Student>();
+    
+    
+    
+    private int regularStudent, dropoutStudent, aRegular, aDropout;
+    
     public void StudentGUI(){
         
         
@@ -413,6 +416,7 @@ public class StudentGUI implements ActionListener{
         dButton.setText("Display");
         dButton.setBounds(50,350,150,50);
         dButton.setForeground(new Color(66,133,244));
+        dButton.addActionListener(this);
         rtPanel.add(dButton);
         
         
@@ -476,171 +480,238 @@ public class StudentGUI implements ActionListener{
         
     }
     
+    public void regularStudent(){
+        int i = 0;
+        for(Student li: arrList){
+            if(li instanceof Regular){
+                Regular rS = (Regular)li;
+                if(rS.getAdded() == true){
+                    i++;
+                }
+            }
+        }
+        aRegular = i;
+    }
+    
+    public void dropoutStudent(){
+        int i = 0;
+        for(Student li: arrList){
+            if(li instanceof Dropout){
+                Dropout dS = (Dropout)li;
+                if(dS.getAdded() == true){
+                    i++;
+                }
+            }
+        }
+        aDropout = i;
+    }
     
     public static void main(String[] args){
         StudentGUI gui = new StudentGUI();
         gui.StudentGUI();
     }
-    public void actionPerformed(ActionEvent e){
-        //For Switching between Regular Student and Dropout Student
-        boolean a;
-        
-        if(toggleMenu.isSelected()){
-            a = true;
-          
-            hL.setText("DROPOUT STUDENT");
-            toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
+        public void actionPerformed(ActionEvent e){
+            //For Switching between Regular Student and Dropout Student
+            boolean a;
             
-            nOML.setVisible(false);
-            nOCHL.setVisible(false);
-            dPL.setVisible(false);
-            dPTF.setVisible(false);
-            
-            nOMTF.setVisible(false);
-            nOCHTF.setVisible(false);
-            
-            cPPB.setVisible(false);
-            addR.setVisible(false);
-            gCB.setVisible(false);
-            addD.setVisible(true);
-            pBB.setVisible(true);
-            rSB.setVisible(true);
-            
-            
-            nORMTF.setVisible(true);
-            nOMATF.setVisible(true);
-            
-            nORML.setVisible(true);
-            nOMAL.setVisible(true);
-            dODL.setVisible(true);
-            
-            
-            
-            dayDODComboBox.setVisible(true);
-            monthDODComboBox.setVisible(true);
-            yearDODComboBox.setVisible(true);
-          
-            
-        }
-        else {
-            a = false;
-            
-            hL.setText("REGULAR STUDENT");
-            toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
-            
-            nORML.setVisible(false);
-            nOMAL.setVisible(false);
-            dODL.setVisible(false);
-            
-            nORMTF.setVisible(false);
-            nOMATF.setVisible(false);
-            nOMTF.setVisible(true);
-            nOCHTF.setVisible(true);
-            
+            if(toggleMenu.isSelected()){
+                a = true;
               
-            nOML.setVisible(true);
-            nOCHL.setVisible(true);
-            dPL.setVisible(true); 
-            dPTF.setVisible(true);
-            
-            dayDODComboBox.setVisible(false);
-            monthDODComboBox.setVisible(false);
-            yearDODComboBox.setVisible(false);
-            
-        
-            cPPB.setVisible(true);
-            addR.setVisible(true);
-            gCB.setVisible(true);
-            
-            
-            addD.setVisible(false);
-            pBB.setVisible(false);
-            rSB.setVisible(false);
-            
-            //
-            
-            
-        }
-        
-        //For Clear Button 
-        if (e.getSource() == cButton) {
-            iDTF.setText(""); // Clearing the Enrollment ID field
-            sNTF.setText("");
-            cNTF.setText("");
-            cDTF.setText("");
-            tFTF.setText("");
-            nOCHTF.setText("");
-            dPTF.setText("");
-            nORMTF.setText("");
-            nOMATF.setText("");
-            nOMTF.setText("");
-            
-            
-            // Clearing the combo boxes
-            dayComboBox.setSelectedIndex(-1);
-            monthComboBox.setSelectedIndex(-1);
-            yearComboBox.setSelectedIndex(-1);
-            
-            
-            daysComboBox.setSelectedIndex(-1);
-            monthsComboBox.setSelectedIndex(-1);
-            yearsComboBox.setSelectedIndex(-1);
-            
-            
-            dayDODComboBox.setSelectedIndex(-1);
-            monthDODComboBox.setSelectedIndex(-1);
-            yearDODComboBox.setSelectedIndex(-1);
-            
-        }
-        
-        //For retriving selected item for Regular Student  
-        String iD = iDTF.getText();
-        String sN = sNTF.getText();
-        
-        // Get the selected date of birth from the JComboBoxes
-        String dayOfBirth = (String) dayComboBox.getSelectedItem();
-        String monthOfBirth = (String) monthComboBox.getSelectedItem();
-        String yearOfBirth = (String) yearComboBox.getSelectedItem();
-        
-        String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
-        
-        String cN = cNTF.getText();
-        String cD = cDTF.getText();
-        String tF = tFTF.getText();
-        String nOM = nOMTF.getText();
-        String nOCH = nOCHTF.getText();
-        String dP = dPTF.getText();
-        
-        // Get the selected date of enrollment from the JComboBoxes
-        String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
-        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
-        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
-        
-        String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
-        
-        //For retriving additional selected item for Dropout Student
-        String nORM =nORMTF.getText();
-        String nOMA = nOMATF.getText();
-        
-        // Get the selected date of dropout from the JComboBoxes
-        String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
-        String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
-        String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
-        
-        String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
-        
-        boolean b;
-        
-        if (e.getSource() == addR){
-            if(iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0){
-                JOptionPane.showMessageDialog(newFrame, "Error: Empty Feilds!","Fill Up",JOptionPane.WARNING_MESSAGE);
-            }
-            else{
-                b = true;
+                hL.setText("DROPOUT STUDENT");
+                toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
+                
+                nOML.setVisible(false);
+                nOCHL.setVisible(false);
+                dPL.setVisible(false);
+                dPTF.setVisible(false);
+                
+                nOMTF.setVisible(false);
+                nOCHTF.setVisible(false);
+                
+                cPPB.setVisible(false);
+                addR.setVisible(false);
+                gCB.setVisible(false);
+                addD.setVisible(true);
+                pBB.setVisible(true);
+                rSB.setVisible(true);
+                
+                
+                nORMTF.setVisible(true);
+                nOMATF.setVisible(true);
+                
+                nORML.setVisible(true);
+                nOMAL.setVisible(true);
+                dODL.setVisible(true);
+                
+                
+                
+                dayDODComboBox.setVisible(true);
+                monthDODComboBox.setVisible(true);
+                yearDODComboBox.setVisible(true);
+              
                 
             }
+            else {
+                a = false;
+                
+                hL.setText("REGULAR STUDENT");
+                toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
+                
+                nORML.setVisible(false);
+                nOMAL.setVisible(false);
+                dODL.setVisible(false);
+                
+                nORMTF.setVisible(false);
+                nOMATF.setVisible(false);
+                nOMTF.setVisible(true);
+                nOCHTF.setVisible(true);
+                
+                  
+                nOML.setVisible(true);
+                nOCHL.setVisible(true);
+                dPL.setVisible(true); 
+                dPTF.setVisible(true);
+                
+                dayDODComboBox.setVisible(false);
+                monthDODComboBox.setVisible(false);
+                yearDODComboBox.setVisible(false);
+                
+            
+                cPPB.setVisible(true);
+                addR.setVisible(true);
+                gCB.setVisible(true);
+                
+                
+                addD.setVisible(false);
+                pBB.setVisible(false);
+                rSB.setVisible(false);
+                
+                //
+                
+                
+            }
+            
+            //For Clear Button 
+            if (e.getSource() == cButton) {
+                iDTF.setText(""); // Clearing the Enrollment ID field
+                sNTF.setText("");
+                cNTF.setText("");
+                cDTF.setText("");
+                tFTF.setText("");
+                nOCHTF.setText("");
+                dPTF.setText("");
+                nORMTF.setText("");
+                nOMATF.setText("");
+                nOMTF.setText("");
+                
+                
+                // Clearing the combo boxes
+                dayComboBox.setSelectedIndex(-1);
+                monthComboBox.setSelectedIndex(-1);
+                yearComboBox.setSelectedIndex(-1);
+                
+                
+                daysComboBox.setSelectedIndex(-1);
+                monthsComboBox.setSelectedIndex(-1);
+                yearsComboBox.setSelectedIndex(-1);
+                
+                
+                dayDODComboBox.setSelectedIndex(-1);
+                monthDODComboBox.setSelectedIndex(-1);
+                yearDODComboBox.setSelectedIndex(-1);
+                
+            }
+            
+            //For retriving selected item for Regular Student  
+            String iD = iDTF.getText();
+            String sN = sNTF.getText();
+            
+            // Get the selected date of birth from the JComboBoxes
+            String dayOfBirth = (String) dayComboBox.getSelectedItem();
+            String monthOfBirth = (String) monthComboBox.getSelectedItem();
+            String yearOfBirth = (String) yearComboBox.getSelectedItem();
+            
+            String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
+            
+            String cN = cNTF.getText();
+            String cD = cDTF.getText();
+            String tF = tFTF.getText();
+            String nOM = nOMTF.getText();
+            String nOCH = nOCHTF.getText();
+            String dP = dPTF.getText();
+            
+            // Get the selected date of enrollment from the JComboBoxes
+            String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
+            String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
+            String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
+            
+            String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
+            
+            //For retriving additional selected item for Dropout Student
+            String nORM =nORMTF.getText();
+            String nOMA = nOMATF.getText();
+            
+            // Get the selected date of dropout from the JComboBoxes
+            String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
+            String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
+            String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
+            
+            String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
+            
+            boolean b;
+            
+        if (e.getSource() == addR) {
+            String newID = iDTF.getText(); // Get the enrollment ID as a String
+            
+            if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0) {
+                JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    // Create a new Regular object and add it to the arrList
+                    Regular newRegularStudent = new Regular(Integer.parseInt(newID), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
+                    
+                    // Check for duplicate enrollment ID
+                    boolean enID = false;
+                    for (Student student : arrList) {
+                        if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
+                            enID = true;
+                            JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
+                            break; // Exit the loop, no need to check further
+                        }
+                    }
+        
+                    if (!enID) {
+                        arrList.add(newRegularStudent);
+                        JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in Enrollment ID field", "Write numbers only!", JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
-        
-        
+
+
+           
+          
+
+            
+           //For Display Button 
+            if(e.getSource() == dButton){
+                if(arrList.isEmpty()){
+                    JOptionPane.showMessageDialog(newFrame,"No Fields to Dispaly", "Arraylist is Empty", JOptionPane.WARNING_MESSAGE);     
+                }else{
+                    /*System.out.println("\t" + "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                    for(Student list: arrList){
+                        if(list instanceof Regular){
+                            System.out.println("\n\n");
+                            rObject = (Regular) list;
+                            rObject.display();
+                        }
+                    }
+                    System.out.println("\n\n");
+                    System.out.println("\t" + "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                }*/
+            }
+        }
     }
 }

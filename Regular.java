@@ -4,6 +4,8 @@ public class Regular extends Student {
     private int numOfCreditHours;
     private double daysPresent;
     private boolean isGrantedScholarship;
+    private boolean added;
+    
     
     //creating a constructor Regular
     public  Regular(int enrollmentID, String dateOfBirth, String courseName, String studentName, String dateOfEnrollment, int courseDuration,
@@ -16,6 +18,8 @@ public class Regular extends Student {
         this.numOfCreditHours = numOfCreditHours;
         this.daysPresent = daysPresent;
         this.isGrantedScholarship = false;
+        this.added = true;
+        
     }
     
     //corresponding accessor method for each attributes    
@@ -46,6 +50,10 @@ public class Regular extends Student {
             this.isGrantedScholarship = isGrantedScholarship;
         }
     
+    public boolean getAdded(){
+        return added;
+    }
+        
     //here presentPercentage method 
         public String presentPercentage(){
         //checks if days present exceeds course duration 
@@ -79,16 +87,24 @@ public class Regular extends Student {
     return message;
     }
     
-    public String display() {
-    String studentInfo = super.display(); // get basic student information from the Student class
-    String regularInfo = "Number of Modules: " + numOfModules + "\n" +
+    public void display(){
+    super.display(); // get basic student information from the Student class
+    if(added ==true){
+    System.out.println("Number of Modules: " + numOfModules + "\n" +
                          "Number of Credit Hours: " + numOfCreditHours + "\n" +
-                         "Days Present: " + daysPresent + " days" + "\n"; // additional information specific to Regular class
-    String studentInformation = studentInfo + regularInfo; // combine basic student information and Regular class information
-    return studentInformation;
+                         "Days Present: " + daysPresent + " days" + "\n"); // additional information specific to Regular class
+    
+    
+    }else{
+        System.out.println("Regular Student has not been added");
+        
+    }
+    }
 }
 
-}
+
+
+
 
 
 

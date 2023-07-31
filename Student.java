@@ -93,21 +93,21 @@ public  class Student
             this.tuitionFee = tuitionFee;
         }
         //Here created display method with String return type.  
-        public String display() {
+        public void display() {
         if (enrollmentID == 0) {
-           return "Not all parameters have been set";
+           System.out.println("Not all parameters have been set");
         } else if (dateOfBirth.isEmpty()) {                 //.isEmpty checks string is empty or not 
-            return "Not all parameters have been set";
+            System.out.println("Not all parameters have been set");
         } else if (studentName.isEmpty()) {
-            return "Not all parameters have been set";
+            System.out.println("Not all parameters have been set");
         } else if (courseDuration == 0) {                   //for int '=='is used if it is equals to 
-            return "Not all parameters have been set";
+            System.out.println("Not all parameters have been set");
         } else if (tuitionFee == 0) {
-            return "Not all parameters have been set";
+            System.out.println("Not all parameters have been set");
         } else if (courseName.isEmpty()) {
-            return "Not all parameters have been set";
+            System.out.println("Not all parameters have been set");
         } else if (dateOfEnrollment.isEmpty()) {
-            return "Not all parameters have been set";
+            System.out.println("Not all parameters have been set");
         } else {
             //creating variable displayString to return String
             String displayString = "\n" + "Enrollment ID: " + enrollmentID + "\n"; // /n is a newline character 
@@ -119,7 +119,7 @@ public  class Student
             displayString += "Course Duration: " + courseDuration + " months\n";
             displayString += "Tuition Fee: Rs." + tuitionFee + "\n";
             displayString += "Date Of Enrollment " + dateOfEnrollment + "\n";
-            return displayString;
+            System.out.println(displayString);
          
         
     }
