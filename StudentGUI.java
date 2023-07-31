@@ -480,37 +480,32 @@ public class StudentGUI implements ActionListener{
         
     }
     
-    public void regularStudent(){
+        public void regularStudent() {
         int i = 0;
-        for(Student li: arrList){
-            if(li instanceof Regular){
-                Regular rS = (Regular)li;
-                if(rS.getAdded() == true){
-                    i++;
-                }
+        for (Student li : arrList) {
+            if (li instanceof Regular) {
+                i++;
             }
         }
         aRegular = i;
     }
+
     
-    public void dropoutStudent(){
-        int i = 0;
-        for(Student li: arrList){
-            if(li instanceof Dropout){
-                Dropout dS = (Dropout)li;
-                if(dS.getAdded() == true){
+            public void dropoutStudent() {
+            int i = 0;
+            for (Student li : arrList) {
+                if (li instanceof Dropout) {
                     i++;
                 }
             }
+            aDropout = i;
         }
-        aDropout = i;
-    }
     
-    public static void main(String[] args){
-        StudentGUI gui = new StudentGUI();
-        gui.StudentGUI();
-    }
-        public void actionPerformed(ActionEvent e){
+        public static void main(String[] args){
+            StudentGUI gui = new StudentGUI();
+            gui.StudentGUI();
+        }
+            public void actionPerformed(ActionEvent e){
             //For Switching between Regular Student and Dropout Student
             boolean a;
             
@@ -658,17 +653,15 @@ public class StudentGUI implements ActionListener{
             
             String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
             
-            boolean b;
             
+        //For add Regular Student button   
         if (e.getSource() == addR) {
-            String newID = iDTF.getText(); // Get the enrollment ID as a String
-            
             if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0) {
                 JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
             } else {
                 try {
                     // Create a new Regular object and add it to the arrList
-                    Regular newRegularStudent = new Regular(Integer.parseInt(newID), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
+                    Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
                     
                     // Check for duplicate enrollment ID
                     boolean enID = false;
@@ -685,7 +678,8 @@ public class StudentGUI implements ActionListener{
                         JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in Enrollment ID field", "Write numbers only!", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in field marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
+                    iDL.setText("Enrollment ID"+ "<html> <font color='red' style='font-size:13px;'>*</font></html>");
                 }
             }
         }
@@ -700,18 +694,18 @@ public class StudentGUI implements ActionListener{
                 if(arrList.isEmpty()){
                     JOptionPane.showMessageDialog(newFrame,"No Fields to Dispaly", "Arraylist is Empty", JOptionPane.WARNING_MESSAGE);     
                 }else{
-                    /*System.out.println("\t" + "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                    for(Student list: arrList){
-                        if(list instanceof Regular){
-                            System.out.println("\n\n");
-                            rObject = (Regular) list;
-                            rObject.display();
-                        }
-                    }
+                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+            for (Student list : arrList) {
+                if (list instanceof Regular) {
                     System.out.println("\n\n");
-                    System.out.println("\t" + "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                }*/
+                    Regular regularStudent = (Regular) list;
+                    regularStudent.display();
+                }
+            }
+                    System.out.println("\n\n");
+                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                }
             }
         }
     }
-}
+

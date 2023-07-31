@@ -4,7 +4,7 @@ public class Regular extends Student {
     private int numOfCreditHours;
     private double daysPresent;
     private boolean isGrantedScholarship;
-    private boolean added;
+    
     
     
     //creating a constructor Regular
@@ -18,7 +18,7 @@ public class Regular extends Student {
         this.numOfCreditHours = numOfCreditHours;
         this.daysPresent = daysPresent;
         this.isGrantedScholarship = false;
-        this.added = true;
+        
         
     }
     
@@ -50,9 +50,7 @@ public class Regular extends Student {
             this.isGrantedScholarship = isGrantedScholarship;
         }
     
-    public boolean getAdded(){
-        return added;
-    }
+    
         
     //here presentPercentage method 
         public String presentPercentage(){
@@ -88,17 +86,13 @@ public class Regular extends Student {
     }
     
     public void display(){
-    super.display(); // get basic student information from the Student class
-    if(added ==true){
-    System.out.println("Number of Modules: " + numOfModules + "\n" +
-                         "Number of Credit Hours: " + numOfCreditHours + "\n" +
+        super.display(); // get basic student information from the Student class
+        
+        System.out.println("Number of Modules: " + numOfModules + "\n" +"Number of Credit Hours: " + numOfCreditHours + "\n" +
                          "Days Present: " + daysPresent + " days" + "\n"); // additional information specific to Regular class
     
     
-    }else{
-        System.out.println("Regular Student has not been added");
-        
-    }
+    
     }
 }
 
