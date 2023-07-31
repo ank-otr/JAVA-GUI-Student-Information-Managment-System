@@ -128,21 +128,21 @@ public class StudentGUI implements ActionListener{
         for (int i = 1; i<=31; i++){
             day[i-1] = Integer.toString(i);
         }
-        JComboBox <String> dayComboBox = new JComboBox<>(day);
+        dayComboBox = new JComboBox<>(day);
         dayComboBox.setBounds(180, 127, 60, 20);
         
         String[] month = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-        JComboBox<String>monthComboBox = new JComboBox<>(month);
+        monthComboBox = new JComboBox<>(month);
         monthComboBox.setBounds(236, 127,80, 20);
         
         String[] year = new String[100];
         for(int i = 0; i < 100; i++){
                     year[i] = Integer.toString(2023 - i);
         }
-        JComboBox<String> yearComboBox = new JComboBox<>(year);
+        yearComboBox = new JComboBox<>(year);
         yearComboBox.setBounds(312,127,90,21);
         
-        JComboBox<String> dOBComboBox = new JComboBox<>();
+        dOBComboBox = new JComboBox<>();
         dOBComboBox.addItem((String) dayComboBox.getSelectedItem());
         dOBComboBox.addItem((String) monthComboBox.getSelectedItem());
         dOBComboBox.addItem((String) yearComboBox.getSelectedItem());
@@ -273,18 +273,18 @@ public class StudentGUI implements ActionListener{
         for (int i = 1; i<=31; i++){
             days[i-1] = Integer.toString(i);
         }
-        JComboBox <String> daysComboBox = new JComboBox<>(days);
+        daysComboBox = new JComboBox<>(days);
         daysComboBox.setBounds(180, 475, 60, 20);
         
         String [] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-        JComboBox <String> monthsComboBox = new JComboBox<>(months);
+        monthsComboBox = new JComboBox<>(months);
         monthsComboBox.setBounds(236, 475,80, 20);
         
         String[] years = new String[100];
         for(int i = 0; i < 100; i++){
                     years[i] = Integer.toString(2023 - i);
         }
-        JComboBox<String> yearsComboBox = new JComboBox<>(years);
+        yearsComboBox = new JComboBox<>(years);
         yearsComboBox.setBounds(312,475,90,21);
         
         JComboBox<String> dOEComboBox = new JComboBox<>();
@@ -360,7 +360,7 @@ public class StudentGUI implements ActionListener{
         yearDODComboBox = new JComboBox<>(yearDOD);
         yearDODComboBox.setBounds(312,425,90,21);
         
-        dODComboBox = new JComboBox<>();
+        JComboBox<String> dODComboBox = new JComboBox<>();
         dOEComboBox.addItem((String) dayDODComboBox.getSelectedItem());
         dOEComboBox.addItem((String) monthDODComboBox.getSelectedItem());
         dOEComboBox.addItem((String) yearDODComboBox.getSelectedItem());
@@ -368,9 +368,7 @@ public class StudentGUI implements ActionListener{
         leftPanel.add(dayDODComboBox);
         leftPanel.add(monthDODComboBox);
         leftPanel.add(yearDODComboBox);
-        //dayDODComboBox.setVisible(false);
-        //monthDODComboBox.setVisible(false);
-        //yearDODComboBox.setVisible(false);
+        
         
         
         //Creating Toggle Button to switch between Regular Student and Dropout Student 
@@ -432,6 +430,7 @@ public class StudentGUI implements ActionListener{
         cButton.setText("Clear");
         cButton.setBounds(250,350,150,50);
         cButton.setForeground(new Color(66,133,244));
+        cButton.addActionListener(this);
         rtPanel.add(cButton);
         
         
@@ -462,14 +461,27 @@ public class StudentGUI implements ActionListener{
         rtPanel.add(rSB);
         
         
+        // Adding a Window Listener to the JFrame newFrame to handle the window closing event
+        newFrame.addWindowListener(new WindowAdapter() {   
+            public void windowClosing(WindowEvent wc) {
+                    int pop = JOptionPane.showConfirmDialog(newFrame, "Do you want to Exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
+                    if (pop == JOptionPane.YES_OPTION) {
+                        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    } else if (pop == JOptionPane.NO_OPTION) {
+                        newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    }
+             }
+        });
+
         
         
-        
-        
+        nORML.setVisible(false);
+        nOMAL.setVisible(false);
+        dODL.setVisible(false);
         newFrame.setVisible(true);
         newFrame.setSize(1000, 700);
         newFrame.setResizable(false);
-        newFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
     }
     
     
@@ -558,5 +570,34 @@ public class StudentGUI implements ActionListener{
             
         }
         
+        
+    if (e.getSource() == cButton) {
+        iDTF.setText(""); // Clearing the Enrollment ID field
+        sNTF.setText("");
+        cNTF.setText("");
+        cDTF.setText("");
+        tFTF.setText("");
+        nOCHTF.setText("");
+        dPTF.setText("");
+        nORMTF.setText("");
+        nOMATF.setText("");
+        nOMTF.setText("");
+        
+        
+        // Clearing the combo boxes
+        dayComboBox.setSelectedIndex(-1);
+        monthComboBox.setSelectedIndex(-1);
+        yearComboBox.setSelectedIndex(-1);
+        dOBComboBox.setSelectedIndex(-1);
+        
+        daysComboBox.setSelectedIndex(-1);
+        monthsComboBox.setSelectedIndex(-1);
+        yearsComboBox.setSelectedIndex(-1);
+        dOEComboBox.setSelectedIndex(-1);
+        
+        dayDODComboBox.setSelectedIndex(-1);
+        monthDODComboBox.setSelectedIndex(-1);
+        yearDODComboBox.setSelectedIndex(-1);
+    }
     }
 }
