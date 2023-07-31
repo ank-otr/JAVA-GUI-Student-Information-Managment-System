@@ -142,10 +142,8 @@ public class StudentGUI implements ActionListener{
         yearComboBox = new JComboBox<>(year);
         yearComboBox.setBounds(312,127,90,21);
         
-        dOBComboBox = new JComboBox<>();
-        dOBComboBox.addItem((String) dayComboBox.getSelectedItem());
-        dOBComboBox.addItem((String) monthComboBox.getSelectedItem());
-        dOBComboBox.addItem((String) yearComboBox.getSelectedItem());
+        
+        
         
         leftPanel.add(dayComboBox);
         leftPanel.add(monthComboBox);
@@ -287,10 +285,7 @@ public class StudentGUI implements ActionListener{
         yearsComboBox = new JComboBox<>(years);
         yearsComboBox.setBounds(312,475,90,21);
         
-        JComboBox<String> dOEComboBox = new JComboBox<>();
-        dOEComboBox.addItem((String) daysComboBox.getSelectedItem());
-        dOEComboBox.addItem((String) monthsComboBox.getSelectedItem());
-        dOEComboBox.addItem((String) yearsComboBox.getSelectedItem());
+        
         
         leftPanel.add(daysComboBox);
         leftPanel.add(monthsComboBox);
@@ -360,10 +355,7 @@ public class StudentGUI implements ActionListener{
         yearDODComboBox = new JComboBox<>(yearDOD);
         yearDODComboBox.setBounds(312,425,90,21);
         
-        JComboBox<String> dODComboBox = new JComboBox<>();
-        dOEComboBox.addItem((String) dayDODComboBox.getSelectedItem());
-        dOEComboBox.addItem((String) monthDODComboBox.getSelectedItem());
-        dOEComboBox.addItem((String) yearDODComboBox.getSelectedItem());
+        
         
         leftPanel.add(dayDODComboBox);
         leftPanel.add(monthDODComboBox);
@@ -492,7 +484,7 @@ public class StudentGUI implements ActionListener{
     public void actionPerformed(ActionEvent e){
         
         boolean a;
-        
+        //For Switching between Regular Student and Dropout Student 
         if(toggleMenu.isSelected()){
             a = true;
           
@@ -523,7 +515,7 @@ public class StudentGUI implements ActionListener{
             dODL.setVisible(true);
             
             
-            dODComboBox.setVisible(true);
+            
             dayDODComboBox.setVisible(true);
             monthDODComboBox.setVisible(true);
             yearDODComboBox.setVisible(true);
@@ -554,7 +546,7 @@ public class StudentGUI implements ActionListener{
             dayDODComboBox.setVisible(false);
             monthDODComboBox.setVisible(false);
             yearDODComboBox.setVisible(false);
-            dODComboBox.setVisible(false);
+            
         
             cPPB.setVisible(true);
             addR.setVisible(true);
@@ -570,34 +562,72 @@ public class StudentGUI implements ActionListener{
             
         }
         
+        //For Clear Button 
+        if (e.getSource() == cButton) {
+            iDTF.setText(""); // Clearing the Enrollment ID field
+            sNTF.setText("");
+            cNTF.setText("");
+            cDTF.setText("");
+            tFTF.setText("");
+            nOCHTF.setText("");
+            dPTF.setText("");
+            nORMTF.setText("");
+            nOMATF.setText("");
+            nOMTF.setText("");
+            
+            
+            // Clearing the combo boxes
+            dayComboBox.setSelectedIndex(-1);
+            monthComboBox.setSelectedIndex(-1);
+            yearComboBox.setSelectedIndex(-1);
+            
+            
+            daysComboBox.setSelectedIndex(-1);
+            monthsComboBox.setSelectedIndex(-1);
+            yearsComboBox.setSelectedIndex(-1);
+            
+            
+            dayDODComboBox.setSelectedIndex(-1);
+            monthDODComboBox.setSelectedIndex(-1);
+            yearDODComboBox.setSelectedIndex(-1);
+            
+        }
         
-    if (e.getSource() == cButton) {
-        iDTF.setText(""); // Clearing the Enrollment ID field
-        sNTF.setText("");
-        cNTF.setText("");
-        cDTF.setText("");
-        tFTF.setText("");
-        nOCHTF.setText("");
-        dPTF.setText("");
-        nORMTF.setText("");
-        nOMATF.setText("");
-        nOMTF.setText("");
+        //For retriving selected item for Regular Student  
+        String iD = iDTF.getText();
+        String sN = sNTF.getText();
         
+        // Get the selected date of birth from the JComboBoxes
+        String dayOfBirth = (String) dayComboBox.getSelectedItem();
+        String monthOfBirth = (String) monthComboBox.getSelectedItem();
+        String yearOfBirth = (String) yearComboBox.getSelectedItem();
         
-        // Clearing the combo boxes
-        dayComboBox.setSelectedIndex(-1);
-        monthComboBox.setSelectedIndex(-1);
-        yearComboBox.setSelectedIndex(-1);
-        dOBComboBox.setSelectedIndex(-1);
+        String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
         
-        daysComboBox.setSelectedIndex(-1);
-        monthsComboBox.setSelectedIndex(-1);
-        yearsComboBox.setSelectedIndex(-1);
-        dOEComboBox.setSelectedIndex(-1);
+        String cN = cNTF.getText();
+        String cD = cDTF.getText();
+        String tF = tFTF.getText();
+        String nOM = nOMTF.getText();
+        String nOCH = nOCHTF.getText();
+        String dP = dPTF.getText();
         
-        dayDODComboBox.setSelectedIndex(-1);
-        monthDODComboBox.setSelectedIndex(-1);
-        yearDODComboBox.setSelectedIndex(-1);
-    }
+        // Get the selected date of enrollment from the JComboBoxes
+        String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
+        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
+        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
+        
+        String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
+        
+        //For retriving additional selected item for Dropout Student
+        String nORM =nORMTF.getText();
+        String nOMA = nOMATF.getText();
+        
+        // Get the selected date of dropout from the JComboBoxes
+        String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
+        String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
+        String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
+        
+        String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
+        
     }
 }
