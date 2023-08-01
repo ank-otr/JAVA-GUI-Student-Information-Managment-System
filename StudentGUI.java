@@ -437,6 +437,7 @@ public class StudentGUI implements ActionListener{
         addD.setText("Add Student");
         addD.setBounds(150,100,150,50);
         addD.setForeground(new Color(66,133,244));
+        addD.addActionListener(this);
         rtPanel.add(addD);
         
         //Creating Pay the Bills of Dropout Student 
@@ -459,13 +460,13 @@ public class StudentGUI implements ActionListener{
         
         // Adding a Window Listener to the JFrame newFrame to handle the window closing event
         newFrame.addWindowListener(new WindowAdapter() {   
-            public void windowClosing(WindowEvent wc) {
-                    int pop = JOptionPane.showConfirmDialog(newFrame, "Do you want to Exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
-                    if (pop == JOptionPane.YES_OPTION) {
-                        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    } else if (pop == JOptionPane.NO_OPTION) {
-                        newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                    }
+        public void windowClosing(WindowEvent wc) {
+                int pop = JOptionPane.showConfirmDialog(newFrame, "Do you want to Exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
+                if (pop == JOptionPane.YES_OPTION) {
+                    newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } else if (pop == JOptionPane.NO_OPTION) {
+                    newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                }
              }
         });
 
@@ -480,7 +481,7 @@ public class StudentGUI implements ActionListener{
         
     }
     
-        public void regularStudent() {
+    public void regularStudent() {
         int i = 0;
         for (Student li : arrList) {
             if (li instanceof Regular) {
@@ -491,133 +492,24 @@ public class StudentGUI implements ActionListener{
     }
 
     
-            public void dropoutStudent() {
-            int i = 0;
-            for (Student li : arrList) {
-                if (li instanceof Dropout) {
-                    i++;
-                }
+    public void dropoutStudent() {
+        int i = 0;
+        for (Student li : arrList) {
+            if (li instanceof Dropout) {
+                i++;
             }
-            aDropout = i;
         }
+        aDropout = i;
+    }
     
-        public static void main(String[] args){
-            StudentGUI gui = new StudentGUI();
-            gui.StudentGUI();
-        }
+    public static void main(String[] args){
+        StudentGUI gui = new StudentGUI();
+        gui.StudentGUI();
+    }
+        
+        
             public void actionPerformed(ActionEvent e){
-            //For Switching between Regular Student and Dropout Student
-            boolean a;
-            
-            if(toggleMenu.isSelected()){
-                a = true;
-              
-                hL.setText("DROPOUT STUDENT");
-                toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
-                
-                nOML.setVisible(false);
-                nOCHL.setVisible(false);
-                dPL.setVisible(false);
-                dPTF.setVisible(false);
-                
-                nOMTF.setVisible(false);
-                nOCHTF.setVisible(false);
-                
-                cPPB.setVisible(false);
-                addR.setVisible(false);
-                gCB.setVisible(false);
-                addD.setVisible(true);
-                pBB.setVisible(true);
-                rSB.setVisible(true);
-                
-                
-                nORMTF.setVisible(true);
-                nOMATF.setVisible(true);
-                
-                nORML.setVisible(true);
-                nOMAL.setVisible(true);
-                dODL.setVisible(true);
-                
-                
-                
-                dayDODComboBox.setVisible(true);
-                monthDODComboBox.setVisible(true);
-                yearDODComboBox.setVisible(true);
-              
-                
-            }
-            else {
-                a = false;
-                
-                hL.setText("REGULAR STUDENT");
-                toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
-                
-                nORML.setVisible(false);
-                nOMAL.setVisible(false);
-                dODL.setVisible(false);
-                
-                nORMTF.setVisible(false);
-                nOMATF.setVisible(false);
-                nOMTF.setVisible(true);
-                nOCHTF.setVisible(true);
-                
-                  
-                nOML.setVisible(true);
-                nOCHL.setVisible(true);
-                dPL.setVisible(true); 
-                dPTF.setVisible(true);
-                
-                dayDODComboBox.setVisible(false);
-                monthDODComboBox.setVisible(false);
-                yearDODComboBox.setVisible(false);
-                
-            
-                cPPB.setVisible(true);
-                addR.setVisible(true);
-                gCB.setVisible(true);
-                
-                
-                addD.setVisible(false);
-                pBB.setVisible(false);
-                rSB.setVisible(false);
-                
-                //
-                
-                
-            }
-            
-            //For Clear Button 
-            if (e.getSource() == cButton) {
-                iDTF.setText(""); // Clearing the Enrollment ID field
-                sNTF.setText("");
-                cNTF.setText("");
-                cDTF.setText("");
-                tFTF.setText("");
-                nOCHTF.setText("");
-                dPTF.setText("");
-                nORMTF.setText("");
-                nOMATF.setText("");
-                nOMTF.setText("");
-                
-                
-                // Clearing the combo boxes
-                dayComboBox.setSelectedIndex(-1);
-                monthComboBox.setSelectedIndex(-1);
-                yearComboBox.setSelectedIndex(-1);
-                
-                
-                daysComboBox.setSelectedIndex(-1);
-                monthsComboBox.setSelectedIndex(-1);
-                yearsComboBox.setSelectedIndex(-1);
-                
-                
-                dayDODComboBox.setSelectedIndex(-1);
-                monthDODComboBox.setSelectedIndex(-1);
-                yearDODComboBox.setSelectedIndex(-1);
-                
-            }
-            
-            //For retriving selected item for Regular Student  
+             //For retriving selected item for Regular Student  
             String iD = iDTF.getText();
             String sN = sNTF.getText();
             
@@ -652,11 +544,125 @@ public class StudentGUI implements ActionListener{
             String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
             
             String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
+                
+            //For Switching between Regular Student and Dropout Student
+            boolean a;
+                
+        if(toggleMenu.isSelected()){
+            a = true;
+                  
+            hL.setText("DROPOUT STUDENT");
+            toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
+                    
+            nOML.setVisible(false);
+            nOCHL.setVisible(false);
+            dPL.setVisible(false);
+            dPTF.setVisible(false);
+                    
+            nOMTF.setVisible(false);
+            nOCHTF.setVisible(false);
+                    
+            cPPB.setVisible(false);
+            addR.setVisible(false);
+            gCB.setVisible(false);
+            addD.setVisible(true);
+                    
+            pBB.setVisible(true);
+            rSB.setVisible(true);
+                    
+                    
+            nORMTF.setVisible(true);
+            nOMATF.setVisible(true);
+                    
+            nORML.setVisible(true);
+            nOMAL.setVisible(true);
+            dODL.setVisible(true);
+                    
+                    
+                    
+            dayDODComboBox.setVisible(true);
+            monthDODComboBox.setVisible(true);
+            yearDODComboBox.setVisible(true);
+                  
+                    
+        }else {
+             a = false;
+                    
+             hL.setText("REGULAR STUDENT");
+             toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
+                    
+             nORML.setVisible(false);
+             nOMAL.setVisible(false);
+             dODL.setVisible(false);
+                    
+             nORMTF.setVisible(false);
+             nOMATF.setVisible(false);
+             nOMTF.setVisible(true);
+             nOCHTF.setVisible(true);
+                    
+                      
+             nOML.setVisible(true);
+             nOCHL.setVisible(true);
+             dPL.setVisible(true); 
+             dPTF.setVisible(true);
+                    
+             dayDODComboBox.setVisible(false);
+             monthDODComboBox.setVisible(false);
+             yearDODComboBox.setVisible(false);
+                    
+                
+             cPPB.setVisible(true);
+             addR.setVisible(true);
+             addD.setVisible(false);
+             gCB.setVisible(true);
+                    
+                    
+             addD.setVisible(false);
+             pBB.setVisible(false);
+             rSB.setVisible(false);
+                    
+                    
+                    
+                    
+                }
+         
+                
+        //For Clear Button 
+        if (e.getSource() == cButton) {
+            iDTF.setText(""); // Clearing the Enrollment ID field
+            sNTF.setText("");
+            cNTF.setText("");
+            cDTF.setText("");
+            tFTF.setText("");
+            nOCHTF.setText("");
+            dPTF.setText("");
+            nORMTF.setText("");
+            nOMATF.setText("");
+            nOMTF.setText("");
             
             
+            // Clearing the combo boxes
+            dayComboBox.setSelectedIndex(-1);
+            monthComboBox.setSelectedIndex(-1);
+            yearComboBox.setSelectedIndex(-1);
+            
+            
+            daysComboBox.setSelectedIndex(-1);
+            monthsComboBox.setSelectedIndex(-1);
+            yearsComboBox.setSelectedIndex(-1);
+            
+            
+            dayDODComboBox.setSelectedIndex(-1);
+            monthDODComboBox.setSelectedIndex(-1);
+            yearDODComboBox.setSelectedIndex(-1);
+            
+        }
+            
+       
         //For add Regular Student button   
         if (e.getSource() == addR) {
-            if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0) {
+            
+            if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0 || cD.length() == 0 ) {
                 JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
             } else {
                 try {
@@ -683,29 +689,65 @@ public class StudentGUI implements ActionListener{
                 }
             }
         }
-
-
-           
-          
-
-            
-           //For Display Button 
-            if(e.getSource() == dButton){
-                if(arrList.isEmpty()){
-                    JOptionPane.showMessageDialog(newFrame,"No Fields to Dispaly", "Arraylist is Empty", JOptionPane.WARNING_MESSAGE);     
-                }else{
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-            for (Student list : arrList) {
-                if (list instanceof Regular) {
-                    System.out.println("\n\n");
-                    Regular regularStudent = (Regular) list;
-                    regularStudent.display();
-                }
-            }
-                    System.out.println("\n\n");
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                }
+        
+                
+        // For add  Dropout Student button
+                if (e.getSource() == addD) {
+          if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || dOD.length() == 0 || dOE.length() == 0 || cD.length() == 0 || nORM.length() == 0 || nOMA.length() == 0) {
+                JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    Dropout newDropoutStudent = new Dropout(sN, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nORM), Integer.parseInt(nOMA), dOD, Integer.parseInt(iD), cN, dOE, dOB);
+                    boolean enID = false;
+                    for (Student student : arrList) {
+                        if (student.getEnrollmentID() == newDropoutStudent.getEnrollmentID()) {
+                            enID = true;
+                            JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newDropoutStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
+                            break;
+                        }
+                    }
+                    if (!enID) {
+                        arrList.add(newDropoutStudent);
+                        JOptionPane.showMessageDialog(newFrame, sN + " is added as a Dropout Student!");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in fields marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
+                    iDL.setText("Enrollment ID" + "<html> <font color='red' style='font-size:13px;'>*</font></html>");
+                }   
             }
         }
+
+
+
+        
+        
+        
+        
+        //For Pay Bills 
+        
+        
+        
+        
+        
+        
+       //For Display Button 
+        if(e.getSource() == dButton){
+            if(arrList.isEmpty()){
+                JOptionPane.showMessageDialog(newFrame,"No Fields to Dispaly", "Arraylist is Empty", JOptionPane.WARNING_MESSAGE);     
+            }else
+            {
+            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+        for (Student list : arrList) {
+            if (list instanceof Regular) {
+                System.out.println("\n\n");
+                Regular regularStudent = (Regular) list;
+                regularStudent.display();
+            }
+        }
+                System.out.println("\n\n");
+                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+            }
+        }
+    }
     }
 

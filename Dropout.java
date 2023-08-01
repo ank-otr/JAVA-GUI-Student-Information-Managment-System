@@ -61,7 +61,7 @@ public class Dropout extends Student {
         this.remainingAmount = remainingAmount ;
     }
     
-    
+        
     // creating billsPayable method to calculate the pending tuition fee amount.
     public void billsPayable() {
     
