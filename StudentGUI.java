@@ -20,7 +20,7 @@ public class StudentGUI implements ActionListener{
     
     
     
-    
+   
     ArrayList<Student> arrList = new ArrayList<Student>();
     
     
@@ -458,6 +458,7 @@ public class StudentGUI implements ActionListener{
         rtPanel.add(rSB);
         
         
+        
         // Adding a Window Listener to the JFrame newFrame to handle the window closing event
         newFrame.addWindowListener(new WindowAdapter() {   
         public void windowClosing(WindowEvent wc) {
@@ -502,6 +503,7 @@ public class StudentGUI implements ActionListener{
         aDropout = i;
     }
     
+    
     public static void main(String[] args){
         StudentGUI gui = new StudentGUI();
         gui.StudentGUI();
@@ -544,7 +546,15 @@ public class StudentGUI implements ActionListener{
             String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
             
             String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
-                
+            
+             boolean idError = false;
+             boolean tuitionFeeError = false;
+             boolean numOfModulesError = false;
+             boolean creditHoursError = false;
+             boolean daysPresentError = false;
+             boolean remainingModulesError = false;
+             boolean monthsAttendedError = false;
+             
             //For Switching between Regular Student and Dropout Student
             boolean a;
                 
@@ -683,7 +693,7 @@ public class StudentGUI implements ActionListener{
                         arrList.add(newRegularStudent);
                         JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
                     }
-                } catch (NumberFormatException ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in field marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
                     iDL.setText("Enrollment ID"+ "<html> <font color='red' style='font-size:13px;'>*</font></html>");
                 }
@@ -710,12 +720,43 @@ public class StudentGUI implements ActionListener{
                         arrList.add(newDropoutStudent);
                         JOptionPane.showMessageDialog(newFrame, sN + " is added as a Dropout Student!");
                     }
-                } catch (NumberFormatException ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in fields marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
-                    iDL.setText("Enrollment ID" + "<html> <font color='red' style='font-size:13px;'>*</font></html>");
-                }   
+            if (!idError) {
+                iDL.setText("Enrollment ID<font color='red'>*</font>");
+                idError = true;
             }
-        }
+            if (!tuitionFeeError) {
+                tFL.setText("Tuition Fee<font color='red'>*</font>");
+                tuitionFeeError = true;
+            }
+            if (!numOfModulesError) {
+                nOML.setText("No.Of Modules<font color='red'>*</font>");
+                numOfModulesError = true;
+            }
+            if (!creditHoursError) {
+                nOCHL.setText("Credit Hours<font color='red'>*</font>");
+                creditHoursError = true;
+            }
+            if (!daysPresentError) {
+                dPL.setText("Days Present<font color='red'>*</font>");
+                daysPresentError = true;
+            }
+            if (!remainingModulesError) {
+                nORML.setText("Remaining Modules<font color='red'>*</font>");
+                remainingModulesError = true;
+            }
+            if (!monthsAttendedError) {
+                nOMAL.setText("Months Attended<font color='red'>*</font>");
+                monthsAttendedError = true;
+            }
+    
+           }
+                                
+    
+         }   
+      }
+     
 
 
 
@@ -731,23 +772,29 @@ public class StudentGUI implements ActionListener{
         
         
        //For Display Button 
-        if(e.getSource() == dButton){
-            if(arrList.isEmpty()){
-                JOptionPane.showMessageDialog(newFrame,"No Fields to Dispaly", "Arraylist is Empty", JOptionPane.WARNING_MESSAGE);     
-            }else
-            {
-            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-        for (Student list : arrList) {
-            if (list instanceof Regular) {
-                System.out.println("\n\n");
-                Regular regularStudent = (Regular) list;
-                regularStudent.display();
-            }
-        }
+        // For Display Button
+        if (e.getSource() == dButton) {
+            if (arrList.isEmpty()) {
+                JOptionPane.showMessageDialog(newFrame, "No Fields to Display", "ArrayList is Empty", JOptionPane.WARNING_MESSAGE);
+            } else {
+                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                for (Student list : arrList) {
+                    if (list instanceof Regular) {
+                        System.out.println("\n\n");
+                        Regular regularStudent = (Regular) list;
+                        regularStudent.display();
+        
+                    } else if (list instanceof Dropout) {
+                        System.out.println("\n\n");
+                        Dropout dropoutStudent = (Dropout) list;
+                        dropoutStudent.display();
+                    }
+                }
                 System.out.println("\n\n");
                 System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
             }
         }
+
     }
     }
 
