@@ -6,8 +6,8 @@ import java.util.*;
 
 
 public class StudentGUI implements ActionListener{
-    private JPanel leftPanel, rtPanal;
-    private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL;
+    private JPanel leftPanel, rtPanal, cPPPanel;
+    private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPP;
     private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF;
     
     private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB;
@@ -457,7 +457,24 @@ public class StudentGUI implements ActionListener{
         rSB.setForeground(new Color(66,133,244));
         rtPanel.add(rSB);
         
+        //Creating new Panel for Calculate Present Percentage of Regular Student
+        leftPanel.setVisible(false);
+        rtPanel.setVisible(false);
+        cPPPanel = new JPanel();
+        cPPPanel.setBounds(250,110,500,350);
+        cPPPanel.setBackground(new Color(33,46,82));
         
+        
+        //Creating JLabel to enter Enrollment ID for Calculate Present Percentage of Regular Student
+        iDCPP = new JLabel();
+        iDCPP.setText("Enrollment ID: ");
+        iDCPP.setFont(new Font("Monospaced", Font.BOLD,14));
+        iDCPP.setForeground(new Color(158,123,55));
+        
+        cPPPanel.add(iDCPP);
+        
+        
+        newFrame.add(cPPPanel);
         
         // Adding a Window Listener to the JFrame newFrame to handle the window closing event
         newFrame.addWindowListener(new WindowAdapter() {   
@@ -634,7 +651,7 @@ public class StudentGUI implements ActionListener{
                     
                     
                     
-                }
+        }
          
                 
         //For Clear Button 
@@ -695,7 +712,6 @@ public class StudentGUI implements ActionListener{
                     }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in field marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
-                    
                 }
             }
         }
@@ -721,39 +737,7 @@ public class StudentGUI implements ActionListener{
                         JOptionPane.showMessageDialog(newFrame, sN + " is added as a Dropout Student!");
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in fields marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
-            if (!idError) {
-                iDL.setText("Enrollment ID<font color='red'>*</font>");
-                idError = true;
-            }
-            if (!tuitionFeeError) {
-                tFL.setText("Tuition Fee<font color='red'>*</font>");
-                tuitionFeeError = true;
-            }
-            if (!numOfModulesError) {
-                nOML.setText("No.Of Modules<font color='red'>*</font>");
-                numOfModulesError = true;
-            }
-            if (!creditHoursError) {
-                nOCHL.setText("Credit Hours<font color='red'>*</font>");
-                creditHoursError = true;
-            }
-            if (!daysPresentError) {
-                dPL.setText("Days Present<font color='red'>*</font>");
-                daysPresentError = true;
-            }
-            if (!remainingModulesError) {
-                nORML.setText("Remaining Modules<font color='red'>*</font>");
-                remainingModulesError = true;
-            }
-            if (!monthsAttendedError) {
-                nOMAL.setText("Months Attended<font color='red'>*</font>");
-                monthsAttendedError = true;
-            }
-    
-           }
-                                
-    
+                    JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in fields marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);   
          }   
       }
      
@@ -764,14 +748,14 @@ public class StudentGUI implements ActionListener{
         
         
         
-        //For Pay Bills 
         
         
         
         
         
         
-       //For Display Button 
+        
+       
         // For Display Button
         if (e.getSource() == dButton) {
             if (arrList.isEmpty()) {
@@ -797,4 +781,5 @@ public class StudentGUI implements ActionListener{
 
     }
     }
+}
 
