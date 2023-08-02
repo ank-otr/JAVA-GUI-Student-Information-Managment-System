@@ -695,7 +695,7 @@ public class StudentGUI implements ActionListener{
                     }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in field marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
-                    iDL.setText("Enrollment ID"+ "<html> <font color='red' style='font-size:13px;'>*</font></html>");
+                    
                 }
             }
         }
