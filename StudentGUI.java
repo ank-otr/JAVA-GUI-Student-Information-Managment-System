@@ -6,18 +6,18 @@ import java.util.*;
 
 
 public class StudentGUI implements ActionListener{
-    private JPanel leftPanel, rtPanal, cPPPanel;
+    private JPanel leftPanel, rtPanel, cPPPanel;
     private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPPL, dPCPPL;
     private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF;
     
-    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP;
+    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clearAll,book;
     
     private JToggleButton toggleMenu;
     private JFrame newFrame;
     private JComboBox dOBComboBox, dOEComboBox, dODComboBox, dayDODComboBox, monthDODComboBox, yearDODComboBox, dayComboBox,
     monthComboBox, yearComboBox,daysComboBox,monthsComboBox,yearsComboBox ;
     
-    
+    private boolean cPPPanelVisible = false; 
     
     
    
@@ -60,12 +60,13 @@ public class StudentGUI implements ActionListener{
         newFrame.add(rtPanel);
         
         //Creating new Panel for Calculate Present Percentage of Regular Student
-        leftPanel.setVisible(false);
-        rtPanel.setVisible(false);
+        
+        
         cPPPanel = new JPanel();
         cPPPanel.setBounds(250,110,500,350);
         cPPPanel.setBackground(new Color(33,46,82));
         cPPPanel.setLayout(null);
+        
         
         
         //Header
@@ -408,6 +409,7 @@ public class StudentGUI implements ActionListener{
         cPPB.setText("Present Percentage");
         cPPB.setBounds(150,175,150,50);
         cPPB.setForeground(new Color(66,133,244));
+        cPPB.addActionListener(this);
         rtPanel.add(cPPB);
         
         
@@ -474,10 +476,10 @@ public class StudentGUI implements ActionListener{
         iDCPPL.setText("Enrollment ID:");
         iDCPPL.setFont(new Font("Monospaced", Font.BOLD,18));
         iDCPPL.setForeground(lC);
-        iDCPPL.setBounds(20,40,200,50);
+        iDCPPL.setBounds(20,80,200,50);
         
         iDCPPTF = new JTextField();
-        iDCPPTF.setBounds(190, 50, 250, 25);
+        iDCPPTF.setBounds(190, 90, 250, 25);
         iDCPPTF.setBackground(new Color(190,195,198));
         iDCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
@@ -490,10 +492,10 @@ public class StudentGUI implements ActionListener{
         dPCPPL.setText("Days Present:");
         dPCPPL.setFont(new Font("Monospaced", Font.BOLD,18));
         dPCPPL.setForeground(lC);
-        dPCPPL.setBounds(20,120,200,50);
+        dPCPPL.setBounds(20,160,200,50);
         
         dPCPPTF = new JTextField();
-        dPCPPTF.setBounds(190, 130, 250, 25);
+        dPCPPTF.setBounds(190, 170, 250, 25);
         dPCPPTF.setBackground(new Color(190,195,198));
         dPCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
@@ -514,6 +516,19 @@ public class StudentGUI implements ActionListener{
         
         cPPPanel.add(closeP);
         
+        //Creating Book button for Calulate Present Pecentage
+        book = new JButton();
+        book.setText("Book");
+        book.setForeground(new Color(66,133,244));
+        book.setBounds(280, 250, 100,50);
+        cPPPanel.add(book);
+        //Creating clear button to clear all for Calculate Present Percentage Panel .......
+        
+        clearAll = new JButton();
+        clearAll.setText("Clear");
+        clearAll.setForeground(Color.RED);
+        clearAll.setBounds(120, 250, 100,50);
+        cPPPanel.add(clearAll);
         
         
         newFrame.add(cPPPanel);
@@ -531,7 +546,7 @@ public class StudentGUI implements ActionListener{
         });
 
         
-        
+        cPPPanel.setVisible(false);
         nORML.setVisible(false);
         nOMAL.setVisible(false);
         dODL.setVisible(false);
@@ -606,13 +621,7 @@ public class StudentGUI implements ActionListener{
             
             String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
             
-             boolean idError = false;
-             boolean tuitionFeeError = false;
-             boolean numOfModulesError = false;
-             boolean creditHoursError = false;
-             boolean daysPresentError = false;
-             boolean remainingModulesError = false;
-             boolean monthsAttendedError = false;
+             
              
             //For Switching between Regular Student and Dropout Student
             boolean a;
@@ -727,7 +736,23 @@ public class StudentGUI implements ActionListener{
             
         }
             
+        // For Calculate Present Percentage Button 
        
+         if (e.getSource() == cPPB) {
+            
+            
+                leftPanel.setVisible(false);
+                rtPanel.setVisible(false);
+                cPPPanel.setVisible(true);
+            
+        }
+    
+
+                
+                
+        
+        
+        
         //For add Regular Student button   
         if (e.getSource() == addR) {
             
