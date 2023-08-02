@@ -7,10 +7,10 @@ import java.util.*;
 
 public class StudentGUI implements ActionListener{
     private JPanel leftPanel, rtPanal, cPPPanel;
-    private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPP;
-    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF;
+    private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPPL, dPCPPL;
+    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF;
     
-    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB;
+    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP;
     
     private JToggleButton toggleMenu;
     private JFrame newFrame;
@@ -58,6 +58,15 @@ public class StudentGUI implements ActionListener{
         rtPanel.setBackground(new Color(33,46,82));
         rtPanel.setBounds(500,95, 445,550);
         newFrame.add(rtPanel);
+        
+        //Creating new Panel for Calculate Present Percentage of Regular Student
+        leftPanel.setVisible(false);
+        rtPanel.setVisible(false);
+        cPPPanel = new JPanel();
+        cPPPanel.setBounds(250,110,500,350);
+        cPPPanel.setBackground(new Color(33,46,82));
+        cPPPanel.setLayout(null);
+        
         
         //Header
         hL = new JLabel();
@@ -457,21 +466,51 @@ public class StudentGUI implements ActionListener{
         rSB.setForeground(new Color(66,133,244));
         rtPanel.add(rSB);
         
-        //Creating new Panel for Calculate Present Percentage of Regular Student
-        leftPanel.setVisible(false);
-        rtPanel.setVisible(false);
-        cPPPanel = new JPanel();
-        cPPPanel.setBounds(250,110,500,350);
-        cPPPanel.setBackground(new Color(33,46,82));
         
         
-        //Creating JLabel to enter Enrollment ID for Calculate Present Percentage of Regular Student
-        iDCPP = new JLabel();
-        iDCPP.setText("Enrollment ID: ");
-        iDCPP.setFont(new Font("Monospaced", Font.BOLD,14));
-        iDCPP.setForeground(new Color(158,123,55));
         
-        cPPPanel.add(iDCPP);
+        //Creating JLabel and TextFeild to enter Enrollment ID for Calculate Present Percentage of Regular Student
+        iDCPPL = new JLabel();
+        iDCPPL.setText("Enrollment ID:");
+        iDCPPL.setFont(new Font("Monospaced", Font.BOLD,18));
+        iDCPPL.setForeground(lC);
+        iDCPPL.setBounds(20,40,200,50);
+        
+        iDCPPTF = new JTextField();
+        iDCPPTF.setBounds(190, 50, 250, 25);
+        iDCPPTF.setBackground(new Color(190,195,198));
+        iDCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
+        
+        cPPPanel.add(iDCPPTF);
+        cPPPanel.add(iDCPPL);
+        
+        //Creating JLabel to enter Days Present for Calculate Present Percentage of Regular Student
+        
+        dPCPPL= new JLabel();
+        dPCPPL.setText("Days Present:");
+        dPCPPL.setFont(new Font("Monospaced", Font.BOLD,18));
+        dPCPPL.setForeground(lC);
+        dPCPPL.setBounds(20,120,200,50);
+        
+        dPCPPTF = new JTextField();
+        dPCPPTF.setBounds(190, 130, 250, 25);
+        dPCPPTF.setBackground(new Color(190,195,198));
+        dPCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
+        
+        cPPPanel.add(dPCPPTF);
+        cPPPanel.add(dPCPPL);
+        
+        //Creating Close Button to go back from Calculate Present Percentage Panel
+        closeP = new JButton();
+        closeP.setBounds(475,3,20,20);
+        ImageIcon closeIcon = new ImageIcon("close.png");
+        Image image = closeIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Resize the image
+            ImageIcon resizedIcon = new ImageIcon(image);
+            closeP.setIcon(resizedIcon);
+        
+        
+        cPPPanel.add(closeP);
+        
         
         
         newFrame.add(cPPPanel);
