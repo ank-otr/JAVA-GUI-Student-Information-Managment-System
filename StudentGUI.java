@@ -502,12 +502,15 @@ public class StudentGUI implements ActionListener{
         
         //Creating Close Button to go back from Calculate Present Percentage Panel
         closeP = new JButton();
+        
         closeP.setBounds(475,3,20,20);
+        
         ImageIcon closeIcon = new ImageIcon("close.png");
         Image image = closeIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Resize the image
-            ImageIcon resizedIcon = new ImageIcon(image);
-            closeP.setIcon(resizedIcon);
+        ImageIcon resizedIcon = new ImageIcon(image);
+        closeP.setIcon(resizedIcon);
         
+
         
         cPPPanel.add(closeP);
         
