@@ -847,8 +847,7 @@ public class StudentGUI implements ActionListener{
                                     JOptionPane.showMessageDialog(newFrame, regularStudent.presentPercentage(), "Attendance Grade", JOptionPane.INFORMATION_MESSAGE);
                                     studentFound = true;
                                     break;
-                                } else {
-                                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + enrollmentId + " does not belong to a Regular Student.", "Invalid Student", JOptionPane.WARNING_MESSAGE);
+                                } else {                                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + enrollmentId + " does not belong to a Regular Student.", "Invalid Student", JOptionPane.WARNING_MESSAGE);
                                     studentFound = true;
                                     break;
                                 }
