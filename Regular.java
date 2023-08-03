@@ -50,13 +50,15 @@ public class Regular extends Student {
             this.isGrantedScholarship = isGrantedScholarship;
         }
     
-    
+    public void setDaysPresent(double daysPresent){
+        this.daysPresent = daysPresent;
+    }
         
     //here presentPercentage method 
         public String presentPercentage(){
         //checks if days present exceeds course duration 
         if ((daysPresent/30) > super.getCourseDuration()) {
-            return "Warning: Number of days present cannot exceed course duration";
+            System.out.println("Warning: Number of days present cannot exceed course duration");
         }
         double presentPercentage = (double) daysPresent / (super.getCourseDuration() * 30) * 100;
         if (presentPercentage >= 80 && presentPercentage <= 100) {
@@ -75,7 +77,9 @@ public class Regular extends Student {
             setIsGrantedScholarship(false);
             return "Attendance Grade: E";
         }
+        
     }
+    
     
     public String grantCertificate(String courseName, int enrollmentId, String dateOfEnrollment) {
      String message ="The Student has graduated from " + courseName + " with enrollment ID " + enrollmentId + " and date of enrollment " + dateOfEnrollment;
