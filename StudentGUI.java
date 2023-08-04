@@ -498,6 +498,7 @@ public class StudentGUI implements ActionListener{
         book.setForeground(new Color(66,133,244));
         book.setBounds(280, 250, 100,50);
         book.addActionListener(this);
+        book.setVisible(false);
         bPanel.add(book);
         //Creating clear button to clear all for Calculate Present Percentage Panel .......
         
@@ -506,7 +507,7 @@ public class StudentGUI implements ActionListener{
         clear.setForeground(Color.RED);
         clear.setBounds(120, 250, 100,50);
         clear.addActionListener(this);
-
+        clear.setVisible(false);
         bPanel.add(clear);
         
         cNGCL = new JLabel();
@@ -514,12 +515,14 @@ public class StudentGUI implements ActionListener{
         cNGCL.setFont(aC);
         cNGCL.setForeground(lC);
         cNGCL.setBounds(20,130,200,50);
+        cNGCL.setVisible(false);
         bPanel.add(cNGCL);
         
         cNGCTF = new JTextField();
         cNGCTF.setBounds(190, 140, 250, 25);
         cNGCTF.setBackground(new Color(190,195,198));
         cNGCTF.setFont(new Font("Monospaced", Font.BOLD,20));
+        cNGCTF.setVisible(false);
         bPanel.add(cNGCTF);
         
         dOEGCL = new JLabel();
@@ -527,6 +530,7 @@ public class StudentGUI implements ActionListener{
         dOEGCL.setFont(aC);
         dOEGCL.setForeground(lC);
         dOEGCL.setBounds(20,180,200,50);
+        dOEGCL.setVisible(false);
         bPanel.add(dOEGCL);
         
         //ComboBox for Date of Enrollment
@@ -548,7 +552,9 @@ public class StudentGUI implements ActionListener{
         }
         yearsGCComboBox = new JComboBox<>(yearsGC);
         yearsGCComboBox.setBounds(320,193,90,21);
-        
+        daysGCComboBox.setVisible(false);
+        monthsGCComboBox.setVisible(false);
+        yearsGCComboBox.setVisible(false);
         bPanel.add(daysGCComboBox);
         bPanel.add(monthsGCComboBox);
         bPanel.add(yearsGCComboBox);
@@ -601,6 +607,8 @@ public class StudentGUI implements ActionListener{
     
     //Creating a method to clear fields 
     private void clearTF(){
+        if(iDTF.length() == 0 || sNTF.length() == 0 || cNTF.length() == 0 || cDTF.length() == 0 || tFTF.length() == 0 || nOCHTF.length() == 0 || dPTF.length() == 0 || 
+            nORMTF.length() == 0 || nOMATF.length() == 0 || nOMTF.length() == 0){
         iDTF.setText(""); // Clearing the Enrollment ID field
         sNTF.setText("");
         cNTF.setText("");
@@ -611,8 +619,12 @@ public class StudentGUI implements ActionListener{
         nORMTF.setText("");
         nOMATF.setText("");
         nOMTF.setText("");
-        iDCPPTF.setText("");
-        dPCPPTF.setText("");
+        //iDCPPTF.setText("");
+        //dPCPPTF.setText("");
+        } else{
+            
+            
+        }
     }
     //Creating a method to clear Combobox
     private void clearComboBox(){
@@ -637,58 +649,48 @@ public class StudentGUI implements ActionListener{
         yearsGCComboBox.setSelectedIndex(-1);
     }
     
-    
-    //Creating method to view elements of the Calculate Present percentage 
-    public void cPPV(boolean showHide){
+    public void hide(boolean showHide){
         if(showHide){
             hL1.setVisible(true);
             clear.setVisible(true);
             closeP.setVisible(true);
+            leftPanel.setVisible(false);
+            rtPanel.setVisible(false);
+            hL.setVisible(false);
+            bPanel.setVisible(true);
+        }else{
+            hL1.setVisible(false);
+            clear.setVisible(false);
+            closeP.setVisible(false);
+            leftPanel.setVisible(true);
+            rtPanel.setVisible(true);
+            hL.setVisible(true);
+            bPanel.setVisible(false);
+        }
+    }
+    //Creating method to view elements of the Calculate Present percentage 
+    public void cPPV(boolean showHide){
+        if(showHide){
+            hide(true);
+            hL1.setText("Calculate Present Percentage");
             iDCPPL.setVisible(true);
             iDCPPTF.setVisible(true);
             dPCPPL.setVisible(true);
             dPCPPTF.setVisible(true);
             book.setVisible(true);
-            leftPanel.setVisible(false);
-            rtPanel.setVisible(false);
-            bPanel.setVisible(true);
-        }else{
             
-            hL1.setVisible(false);
-            clear.setVisible(false);
-            closeP.setVisible(false);
+        }else{
+            hide(false);
+            hL1.setText("");
             iDCPPL.setVisible(false);
             iDCPPTF.setVisible(false);
             dPCPPL.setVisible(false);
             dPCPPTF.setVisible(false);
             book.setVisible(false);
-            bPanel.setVisible(false);
-            leftPanel.setVisible(true);
-            rtPanel.setVisible(true);
+            
         }
         
     }
-    
-        //Creating method to switch Panel 
-        public void switchPanel1(boolean showHide1){
-        if (showHide1) {
-            cPPV(true);
-            hL1.setText("Calculate Present Percentage");
-            hL.setVisible(false);
-            
-            
-        } else {
-            cPPV(false);
-            hL.setVisible(true);
-            
-            
-        }
-    
-        
-    }
-
-    
-    
     
     
     //Main Method
@@ -696,7 +698,7 @@ public class StudentGUI implements ActionListener{
         StudentGUI gui = new StudentGUI();
         gui.StudentGUI();
     }
-      
+     
     //Action Listener    
         public void actionPerformed(ActionEvent e){
         //For retriving selected item for Regular Student  
@@ -741,10 +743,8 @@ public class StudentGUI implements ActionListener{
         if(toggleMenu.isSelected()){
             a = true;
             
-            clearTF();
-            clearComboBox();
             hL.setText("DROPOUT STUDENT");
-            toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
+            toggleMenu.setText("<html><font color='white' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
                     
             nOML.setVisible(false);
             nOCHL.setVisible(false);
@@ -779,11 +779,9 @@ public class StudentGUI implements ActionListener{
                     
         }else{
             a = false;
-            
-            clearTF();
-            clearComboBox();       
+                  
             hL.setText("REGULAR STUDENT");
-            toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
+            toggleMenu.setText("<html><font color='white' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
                     
             nORML.setVisible(false);
             nOMAL.setVisible(false);
@@ -821,35 +819,26 @@ public class StudentGUI implements ActionListener{
         }
            
         //For Clear Buttons 
-        if (e.getSource() == cButton || e.getSource() == clear) {
-        clearTF();
-        clearComboBox();
-        }   
-        
+        if (e.getSource() == cButton) {
+            clearTF();
+            clearComboBox();
+        }
         
         // For Calculate Present Percentage Button    
         if (e.getSource() == cPPB) {
-             SwingUtilities.invokeLater(() -> switchPanel1(true));
+             cPPV(true);
                         
             
         } else{
-             SwingUtilities.invokeLater(() -> switchPanel1(false));
+             cPPV(false);
             
             
         }
-        /*
-        //For Grant Certificate Button 
-        if (e.getSource() == gCB){
-            switchPanel2(true);
-        }else{
-            switchPanel2(false);
-        } */
         
         //For CloseP Button 
         if (e.getSource() == closeP){
-             switchPanel1(true);
-        }else{
-            switchPanel1(false);
+             hide(false);
+        
         }
         
         //For add Regular Student button   
