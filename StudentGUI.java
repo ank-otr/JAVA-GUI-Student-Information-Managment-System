@@ -3,44 +3,45 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
-
-
 public class StudentGUI implements ActionListener{
-    private JPanel leftPanel, rtPanel, cPPPanel;
-    private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPPL, dPCPPL, hL1;
-    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF;
+    private JPanel leftPanel, rtPanel, bPanel;
     
-    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clearAll,book;
+    private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPPL, dPCPPL, hL1, cNGCL, dOEGCL;
+    
+    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF, cNGCTF;
+    
+    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clear,book;
     
     private JToggleButton toggleMenu;
+    
     private JFrame newFrame;
+    
     private JComboBox dOBComboBox, dOEComboBox, dODComboBox, dayDODComboBox, monthDODComboBox, yearDODComboBox, dayComboBox,
-    monthComboBox, yearComboBox,daysComboBox,monthsComboBox,yearsComboBox ;
-    
-    private boolean cPPPanelVisible = false; 
-    
-    
-   
-    ArrayList<Student> arrList = new ArrayList<Student>();
+    monthComboBox, yearComboBox,daysComboBox,monthsComboBox,yearsComboBox,daysGCComboBox,monthsGCComboBox,yearsGCComboBox ;
     
     
     
     private int regularStudent, dropoutStudent, aRegular, aDropout;
     
-    public void StudentGUI(){
-        
+    ArrayList<Student> arrList = new ArrayList<Student>();
     
-
-        
+    
+    
+    
+    
+    public void StudentGUI(){
+        Font aC = new Font("Monospaced", Font.BOLD,14);
+        Color lC = new Color(237,139,0), tFC = new Color(190,195,198);   
         newFrame = new JFrame();
         newFrame.setTitle("Student Information System");
         newFrame.setLayout(null);
         newFrame.setBackground(new Color(217,236,238,255));
         newFrame.getContentPane().setBackground(new Color(155, 155, 155));
         
-        //setting Frame Background 
+        /* Setting Frame Background 
         
-        // Set background image on the content pane
+        Set background image on the content pane*/
+        
         ImageIcon img = new ImageIcon("background.jpg");
         JLabel background = new JLabel("", img, JLabel.CENTER);
         background.setBounds(0, 0, 1000, 700);
@@ -48,6 +49,7 @@ public class StudentGUI implements ActionListener{
         
         
         //Creating Panels 
+        
         leftPanel = new JPanel();
         leftPanel.setLayout(null);
         leftPanel.setBackground(new Color(33,46,82));
@@ -63,14 +65,15 @@ public class StudentGUI implements ActionListener{
         //Creating new Panel for Calculate Present Percentage of Regular Student
         
         
-        cPPPanel = new JPanel();
-        cPPPanel.setBounds(250,110,500,350);
-        cPPPanel.setBackground(new Color(33,46,82));
-        cPPPanel.setLayout(null);
+        bPanel = new JPanel();
+        bPanel.setBounds(250,110,500,350);
+        bPanel.setBackground(new Color(33,46,82));
+        bPanel.setLayout(null);
         
         
         
         //Header
+        
         hL = new JLabel();
         hL.setText("REGULAR STUDENT");
         hL.setFont(new Font("Monospaced", Font.BOLD,30));
@@ -81,6 +84,7 @@ public class StudentGUI implements ActionListener{
         
         
         //Footer 
+        
         JLabel fL= new JLabel();
         fL.setText("By:Ankit Kumar Bindu, Met ID: 2285800");
         fL.setFont(new Font("Monospaced", Font.BOLD,10));
@@ -88,14 +92,12 @@ public class StudentGUI implements ActionListener{
         fL.setBounds(740,636,500,50);
         newFrame.add(fL);
         
-        //Fonts and Colors
-        Font aC = new Font("Monospaced", Font.BOLD,14);
-        Color tFC = new Color(190,195,198);
-        Color lC = new Color(237,139,0);
+        
         
         
         
         //Label for Enrollment ID
+        
         iDL = new JLabel();
         iDL.setText("Enrollment ID: ");
         iDL.setFont(new Font("Monospaced", Font.BOLD,14));
@@ -104,6 +106,7 @@ public class StudentGUI implements ActionListener{
         leftPanel.add(iDL);
         
         //TextField for Enrollment ID
+        
         iDTF = new JTextField();
         iDTF.setBounds(180, 25, 250, 25);
         iDTF.setBackground(new Color(190,195,198));
@@ -111,6 +114,7 @@ public class StudentGUI implements ActionListener{
         leftPanel.add(iDTF);
         
         //Label for Student Name 
+        
         sNL = new JLabel();
         sNL.setText("Student Name: ");
         sNL.setFont(aC);
@@ -150,20 +154,16 @@ public class StudentGUI implements ActionListener{
         
         String[] year = new String[100];
         for(int i = 0; i < 100; i++){
-                    year[i] = Integer.toString(2023 - i);
+            year[i] = Integer.toString(2023 - i);
         }
         yearComboBox = new JComboBox<>(year);
         yearComboBox.setBounds(312,127,90,21);
-        
-        
-        
         
         leftPanel.add(dayComboBox);
         leftPanel.add(monthComboBox);
         leftPanel.add(yearComboBox);
         
         //Label for Course Name
-        
         cNL = new JLabel();
         cNL.setText("Course Name: ");
         cNL.setFont(aC);
@@ -172,8 +172,6 @@ public class StudentGUI implements ActionListener{
         leftPanel.add(cNL);
         
         //TextField for Course Name 
-        
-        
         cNTF = new JTextField();
         cNTF.setBounds(180, 175, 250, 25);
         cNTF.setBackground(new Color(190,195,198));
@@ -190,7 +188,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Text Field for Course Duration
-        
         cDTF = new JTextField();
         cDTF.setBounds(180, 225, 250, 25);
         cDTF.setBackground(new Color(190,195,198));
@@ -208,7 +205,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Text Feild for Tuition Fee
-        
         tFTF = new JTextField();
         tFTF.setBounds(180, 275, 250, 25);
         tFTF.setBackground(new Color(190,195,198));
@@ -226,7 +222,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Text Feild for Number Of Modules 
-        
         nOMTF = new JTextField();
         nOMTF.setBounds(180, 325, 250, 25);
         nOMTF.setBackground(new Color(190,195,198));
@@ -245,7 +240,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Text Feild for Number Of Credit Hours
-        
         nOCHTF = new JTextField();
         nOCHTF.setBounds(180, 375, 250, 25);
         nOCHTF.setBackground(new Color(190,195,198));
@@ -262,7 +256,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Text Feild for Days Present
-        
         dPTF = new JTextField();
         dPTF.setBounds(180, 424, 250, 25);
         dPTF.setBackground(new Color(190,195,198));
@@ -293,12 +286,10 @@ public class StudentGUI implements ActionListener{
         
         String[] years = new String[100];
         for(int i = 0; i < 100; i++){
-                    years[i] = Integer.toString(2023 - i);
+            years[i] = Integer.toString(2023 - i);
         }
         yearsComboBox = new JComboBox<>(years);
         yearsComboBox.setBounds(312,475,90,21);
-        
-        
         
         leftPanel.add(daysComboBox);
         leftPanel.add(monthsComboBox);
@@ -316,7 +307,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Text Feild for Number Of Remaining Modules 
-        
         nORMTF = new JTextField();
         nORMTF.setBounds(180, 325, 250, 25);
         nORMTF.setBackground(new Color(190,195,198));
@@ -333,7 +323,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Text Feild for Number Of Months Attended 
-        
         nOMATF = new JTextField();
         nOMATF.setBounds(180, 375, 250, 25);
         nOMATF.setBackground(new Color(190,195,198));
@@ -363,12 +352,10 @@ public class StudentGUI implements ActionListener{
         
         String[] yearDOD = new String[100];
         for(int i = 0; i < 100; i++){
-                    yearDOD[i] = Integer.toString(2023 - i);
+            yearDOD[i] = Integer.toString(2023 - i);
         }
         yearDODComboBox = new JComboBox<>(yearDOD);
         yearDODComboBox.setBounds(312,425,90,21);
-        
-        
         
         leftPanel.add(dayDODComboBox);
         leftPanel.add(monthDODComboBox);
@@ -378,18 +365,12 @@ public class StudentGUI implements ActionListener{
         
         //Creating Toggle Button to switch between Regular Student and Dropout Student 
         toggleMenu = new JToggleButton();
-        
-        
         toggleMenu.setText("<html><font color='white' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;' >    Dropout Student</font></html>");
-
         toggleMenu.setBounds(110, 10, 230, 45);
         toggleMenu.setBorder(BorderFactory.createTitledBorder("<html> <font color='white'>Switch to</font></html>"));
-        
         toggleMenu.addActionListener(this);
         toggleMenu.setFont(new Font("Monospaced", Font.PLAIN,14));
-        
         toggleMenu.setForeground(new Color(158,123,55)); 
-        
         rtPanel.add(toggleMenu);
         
         
@@ -398,14 +379,10 @@ public class StudentGUI implements ActionListener{
         addR.setText("Add Student");
         addR.setBounds(150,100,150,50);
         addR.addActionListener(this);
-        
         addR.setForeground(new Color(66,133,244)); // Set the text color to make it visible on the blue background
-        
-        
         rtPanel.add(addR);
         
         //Creating Calculate Present Percentage of Regular Student Button 
-        
         cPPB = new JButton();
         cPPB.setText("Present Percentage");
         cPPB.setBounds(150,175,150,50);
@@ -415,15 +392,14 @@ public class StudentGUI implements ActionListener{
         
         
         //Creating Grant Certifiacte of Regular Student Button 
-        
         gCB = new JButton();
         gCB.setText("Grant Certificate");
         gCB.setBounds(150,250,150,50);
         gCB.setForeground(new Color(66,133,244));
+        gCB.addActionListener(this);
         rtPanel.add(gCB);
         
         //Creating Display Button 
-        
         dButton = new JButton();
         dButton.setText("Display");
         dButton.setBounds(50,350,150,50);
@@ -433,16 +409,12 @@ public class StudentGUI implements ActionListener{
         
         
         //Creating Clear Button
-        
         cButton = new JButton();
         cButton.setText("Clear");
         cButton.setBounds(250,350,150,50);
         cButton.setForeground(new Color(66,133,244));
         cButton.addActionListener(this);
         rtPanel.add(cButton);
-        
-        
-        
         
         //Creating Add Dropout student button
         addD = new JButton();
@@ -453,7 +425,6 @@ public class StudentGUI implements ActionListener{
         rtPanel.add(addD);
         
         //Creating Pay the Bills of Dropout Student 
-        
         pBB = new JButton();
         pBB.setText("Pay Bills");
         pBB.setBounds(150,175,150,50);
@@ -462,7 +433,6 @@ public class StudentGUI implements ActionListener{
         
         
         //Creating Remove Student Button 
-        
         rSB = new JButton();
         rSB.setText("Remove Student");
         rSB.setBounds(150,250,150,50);
@@ -484,17 +454,17 @@ public class StudentGUI implements ActionListener{
         iDCPPTF.setBackground(new Color(190,195,198));
         iDCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
-        cPPPanel.add(iDCPPTF);
-        cPPPanel.add(iDCPPL);
+        bPanel.add(iDCPPTF);
+        bPanel.add(iDCPPL);
         
         //Creating JLabel to enter Days Present for Calculate Present Percentage of Regular Student
         hL1 =new JLabel();
-        hL1.setText("Present Percentage of Regular Student");
+        hL1.setText("");
         hL1.setFont(new Font("SERIF", Font.BOLD,22));
         hL1.setForeground(new Color(237,139,0));
         
         hL1.setBounds(50,10,400,50); 
-        cPPPanel.add(hL1);
+        bPanel.add(hL1);
         
         dPCPPL= new JLabel();
         dPCPPL.setText("Days Present:");
@@ -507,8 +477,8 @@ public class StudentGUI implements ActionListener{
         dPCPPTF.setBackground(new Color(190,195,198));
         dPCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
-        cPPPanel.add(dPCPPTF);
-        cPPPanel.add(dPCPPL);
+        bPanel.add(dPCPPTF);
+        bPanel.add(dPCPPL);
         
         //Creating Close Button to go back from Calculate Present Percentage Panel
         closeP = new JButton();
@@ -520,7 +490,7 @@ public class StudentGUI implements ActionListener{
         ImageIcon resizedIcon = new ImageIcon(image);
         closeP.setIcon(resizedIcon);
         closeP.addActionListener(this);
-        cPPPanel.add(closeP);
+        bPanel.add(closeP);
         
         //Creating Book button for Calulate Present Pecentage
         book = new JButton();
@@ -528,32 +498,77 @@ public class StudentGUI implements ActionListener{
         book.setForeground(new Color(66,133,244));
         book.setBounds(280, 250, 100,50);
         book.addActionListener(this);
-        cPPPanel.add(book);
+        bPanel.add(book);
         //Creating clear button to clear all for Calculate Present Percentage Panel .......
         
-        clearAll = new JButton();
-        clearAll.setText("Clear");
-        clearAll.setForeground(Color.RED);
-        clearAll.setBounds(120, 250, 100,50);
-        cPPPanel.add(clearAll);
+        clear = new JButton();
+        clear.setText("Clear");
+        clear.setForeground(Color.RED);
+        clear.setBounds(120, 250, 100,50);
+        clear.addActionListener(this);
+
+        bPanel.add(clear);
         
+        cNGCL = new JLabel();
+        cNGCL.setText("Course Name:");
+        cNGCL.setFont(aC);
+        cNGCL.setForeground(lC);
+        cNGCL.setBounds(20,130,200,50);
+        bPanel.add(cNGCL);
         
-        newFrame.add(cPPPanel);
+        cNGCTF = new JTextField();
+        cNGCTF.setBounds(190, 140, 250, 25);
+        cNGCTF.setBackground(new Color(190,195,198));
+        cNGCTF.setFont(new Font("Monospaced", Font.BOLD,20));
+        bPanel.add(cNGCTF);
+        
+        dOEGCL = new JLabel();
+        dOEGCL.setText("Date of Enrollment:");
+        dOEGCL.setFont(aC);
+        dOEGCL.setForeground(lC);
+        dOEGCL.setBounds(20,180,200,50);
+        bPanel.add(dOEGCL);
+        
+        //ComboBox for Date of Enrollment
+        
+        String[] daysGC = new String[31];
+        for (int i = 1; i<=31; i++){
+            daysGC[i-1] = Integer.toString(i);
+        }
+        daysGCComboBox = new JComboBox<>(daysGC);
+        daysGCComboBox.setBounds(190, 193, 60, 20);
+        
+        String [] monthsGC = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        monthsGCComboBox = new JComboBox<>(monthsGC);
+        monthsGCComboBox.setBounds(245, 193,80, 20);
+        
+        String[] yearsGC = new String[100];
+        for(int i = 0; i < 100; i++){
+            yearsGC[i] = Integer.toString(2023 - i);
+        }
+        yearsGCComboBox = new JComboBox<>(yearsGC);
+        yearsGCComboBox.setBounds(320,193,90,21);
+        
+        bPanel.add(daysGCComboBox);
+        bPanel.add(monthsGCComboBox);
+        bPanel.add(yearsGCComboBox);
+        
         
         // Adding a Window Listener to the JFrame newFrame to handle the window closing event
-        newFrame.addWindowListener(new WindowAdapter() {   
-        public void windowClosing(WindowEvent wc) {
-                int pop = JOptionPane.showConfirmDialog(newFrame, "Do you want to Exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
-                if (pop == JOptionPane.YES_OPTION) {
-                    newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                } else if (pop == JOptionPane.NO_OPTION) {
-                    newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                }
-             }
+        newFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent wc) {
+                    int pop = JOptionPane.showConfirmDialog(newFrame, "Do you want to Exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
+                    if (pop == JOptionPane.YES_OPTION) {
+                        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    } else if (pop == JOptionPane.NO_OPTION) {
+                        newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    }
+            }
         });
-
         
-        cPPPanel.setVisible(false);
+        newFrame.add(bPanel);
+        
+        bPanel.setVisible(false);
         nORML.setVisible(false);
         nOMAL.setVisible(false);
         dODL.setVisible(false);
@@ -584,325 +599,379 @@ public class StudentGUI implements ActionListener{
         aDropout = i;
     }
     
+    //Creating a method to clear fields 
+    private void clearTF(){
+        iDTF.setText(""); // Clearing the Enrollment ID field
+        sNTF.setText("");
+        cNTF.setText("");
+        cDTF.setText("");
+        tFTF.setText("");
+        nOCHTF.setText("");
+        dPTF.setText("");
+        nORMTF.setText("");
+        nOMATF.setText("");
+        nOMTF.setText("");
+        iDCPPTF.setText("");
+        dPCPPTF.setText("");
+    }
+    //Creating a method to clear Combobox
+    private void clearComboBox(){
+        //Clearing the combo boxes
+        
+        dayComboBox.setSelectedIndex(-1);
+        monthComboBox.setSelectedIndex(-1);
+        yearComboBox.setSelectedIndex(-1);
+        
+        
+        daysComboBox.setSelectedIndex(-1);
+        monthsComboBox.setSelectedIndex(-1);
+        yearsComboBox.setSelectedIndex(-1);
+        
+        
+        dayDODComboBox.setSelectedIndex(-1);
+        monthDODComboBox.setSelectedIndex(-1);
+        yearDODComboBox.setSelectedIndex(-1);
+        
+        daysGCComboBox.setSelectedIndex(-1);
+        monthsGCComboBox.setSelectedIndex(-1);
+        yearsGCComboBox.setSelectedIndex(-1);
+    }
     
+    
+    //Creating method to view elements of the Calculate Present percentage 
+    public void cPPV(boolean showHide){
+        if(showHide){
+            hL1.setVisible(true);
+            clear.setVisible(true);
+            closeP.setVisible(true);
+            iDCPPL.setVisible(true);
+            iDCPPTF.setVisible(true);
+            dPCPPL.setVisible(true);
+            dPCPPTF.setVisible(true);
+            book.setVisible(true);
+            leftPanel.setVisible(false);
+            rtPanel.setVisible(false);
+            bPanel.setVisible(true);
+        }else{
+            
+            hL1.setVisible(false);
+            clear.setVisible(false);
+            closeP.setVisible(false);
+            iDCPPL.setVisible(false);
+            iDCPPTF.setVisible(false);
+            dPCPPL.setVisible(false);
+            dPCPPTF.setVisible(false);
+            book.setVisible(false);
+            bPanel.setVisible(false);
+            leftPanel.setVisible(true);
+            rtPanel.setVisible(true);
+        }
+        
+    }
+    
+        //Creating method to switch Panel 
+        public void switchPanel1(boolean showHide1){
+        if (showHide1) {
+            cPPV(true);
+            hL1.setText("Calculate Present Percentage");
+            hL.setVisible(false);
+            
+            
+        } else {
+            cPPV(false);
+            hL.setVisible(true);
+            
+            
+        }
+    
+        
+    }
+
+    
+    
+    
+    
+    //Main Method
     public static void main(String[] args){
         StudentGUI gui = new StudentGUI();
         gui.StudentGUI();
     }
+      
+    //Action Listener    
+        public void actionPerformed(ActionEvent e){
+        //For retriving selected item for Regular Student  
+        String iD = iDTF.getText();
+        String sN = sNTF.getText();
+        
+        // Get the selected date of birth from the JComboBoxes
+        String dayOfBirth = (String) dayComboBox.getSelectedItem();
+        String monthOfBirth = (String) monthComboBox.getSelectedItem();
+        String yearOfBirth = (String) yearComboBox.getSelectedItem();
+        
+        String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
+        
+        String cN = cNTF.getText();
+        String cD = cDTF.getText();
+        String tF = tFTF.getText();
+        String nOM = nOMTF.getText();
+        String nOCH = nOCHTF.getText();
+        String dP = dPTF.getText();
+        
+        // Get the selected date of enrollment from the JComboBoxes
+        String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
+        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
+        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
+        
+        String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
+        
+        //For retriving additional selected item for Dropout Student
+        String nORM =nORMTF.getText();
+        String nOMA = nOMATF.getText();
+        
+        // Get the selected date of dropout from the JComboBoxes
+        String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
+        String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
+        String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
+        
+        String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
+        
+        boolean a; //Intializing boolean for toggleMenu
+        boolean showHide;
+        //For Switching between Regular Student and Dropout Student         
+        if(toggleMenu.isSelected()){
+            a = true;
+            
+            clearTF();
+            clearComboBox();
+            hL.setText("DROPOUT STUDENT");
+            toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
+                    
+            nOML.setVisible(false);
+            nOCHL.setVisible(false);
+            dPL.setVisible(false);
+            dPTF.setVisible(false);
+                    
+            nOMTF.setVisible(false);
+            nOCHTF.setVisible(false);
+                    
+            cPPB.setVisible(false);
+            addR.setVisible(false);
+            gCB.setVisible(false);
+            addD.setVisible(true);
+                    
+            pBB.setVisible(true);
+            rSB.setVisible(true);
+                    
+                    
+            nORMTF.setVisible(true);
+            nOMATF.setVisible(true);
+                    
+            nORML.setVisible(true);
+            nOMAL.setVisible(true);
+            dODL.setVisible(true);
+                    
+                    
+                    
+            dayDODComboBox.setVisible(true);
+            monthDODComboBox.setVisible(true);
+            yearDODComboBox.setVisible(true);
+                  
+                    
+        }else{
+            a = false;
+            
+            clearTF();
+            clearComboBox();       
+            hL.setText("REGULAR STUDENT");
+            toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
+                    
+            nORML.setVisible(false);
+            nOMAL.setVisible(false);
+            dODL.setVisible(false);
+                    
+            nORMTF.setVisible(false);
+            nOMATF.setVisible(false);
+            nOMTF.setVisible(true);
+            nOCHTF.setVisible(true);
+                    
+                      
+            nOML.setVisible(true);
+            nOCHL.setVisible(true);
+            dPL.setVisible(true); 
+            dPTF.setVisible(true);
+                    
+            dayDODComboBox.setVisible(false);
+            monthDODComboBox.setVisible(false);
+            yearDODComboBox.setVisible(false);
+                    
+                
+            cPPB.setVisible(true);
+            addR.setVisible(true);
+            addD.setVisible(false);
+            gCB.setVisible(true);
+                    
+                    
+            addD.setVisible(false);
+            pBB.setVisible(false);
+            rSB.setVisible(false);
+                    
+                    
+                    
+                    
+        }
+           
+        //For Clear Buttons 
+        if (e.getSource() == cButton || e.getSource() == clear) {
+        clearTF();
+        clearComboBox();
+        }   
         
         
-            public void actionPerformed(ActionEvent e){
-                     //For retriving selected item for Regular Student  
-                    String iD = iDTF.getText();
-                    String sN = sNTF.getText();
-                    
-                    // Get the selected date of birth from the JComboBoxes
-                    String dayOfBirth = (String) dayComboBox.getSelectedItem();
-                    String monthOfBirth = (String) monthComboBox.getSelectedItem();
-                    String yearOfBirth = (String) yearComboBox.getSelectedItem();
-                    
-                    String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
-                    
-                    String cN = cNTF.getText();
-                    String cD = cDTF.getText();
-                    String tF = tFTF.getText();
-                    String nOM = nOMTF.getText();
-                    String nOCH = nOCHTF.getText();
-                    String dP = dPTF.getText();
-                    
-                    // Get the selected date of enrollment from the JComboBoxes
-                    String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
-                    String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
-                    String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
-                    
-                    String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
-                    
-                    //For retriving additional selected item for Dropout Student
-                    String nORM =nORMTF.getText();
-                    String nOMA = nOMATF.getText();
-                    
-                    // Get the selected date of dropout from the JComboBoxes
-                    String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
-                    String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
-                    String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
-                    
-                    String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
-                    
-                     
-                     
-                    //For Switching between Regular Student and Dropout Student
-                    boolean a;
+        // For Calculate Present Percentage Button    
+        if (e.getSource() == cPPB) {
+             SwingUtilities.invokeLater(() -> switchPanel1(true));
                         
-                if(toggleMenu.isSelected()){
-                    a = true;
-                          
-                    hL.setText("DROPOUT STUDENT");
-                    toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
-                            
-                    nOML.setVisible(false);
-                    nOCHL.setVisible(false);
-                    dPL.setVisible(false);
-                    dPTF.setVisible(false);
-                            
-                    nOMTF.setVisible(false);
-                    nOCHTF.setVisible(false);
-                            
-                    cPPB.setVisible(false);
-                    addR.setVisible(false);
-                    gCB.setVisible(false);
-                    addD.setVisible(true);
-                            
-                    pBB.setVisible(true);
-                    rSB.setVisible(true);
-                            
-                            
-                    nORMTF.setVisible(true);
-                    nOMATF.setVisible(true);
-                            
-                    nORML.setVisible(true);
-                    nOMAL.setVisible(true);
-                    dODL.setVisible(true);
-                            
-                            
-                            
-                    dayDODComboBox.setVisible(true);
-                    monthDODComboBox.setVisible(true);
-                    yearDODComboBox.setVisible(true);
-                          
-                            
-                }else {
-                     a = false;
-                            
-                     hL.setText("REGULAR STUDENT");
-                     toggleMenu.setText("<html><font color='black' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
-                            
-                     nORML.setVisible(false);
-                     nOMAL.setVisible(false);
-                     dODL.setVisible(false);
-                            
-                     nORMTF.setVisible(false);
-                     nOMATF.setVisible(false);
-                     nOMTF.setVisible(true);
-                     nOCHTF.setVisible(true);
-                            
-                              
-                     nOML.setVisible(true);
-                     nOCHL.setVisible(true);
-                     dPL.setVisible(true); 
-                     dPTF.setVisible(true);
-                            
-                     dayDODComboBox.setVisible(false);
-                     monthDODComboBox.setVisible(false);
-                     yearDODComboBox.setVisible(false);
-                            
-                        
-                     cPPB.setVisible(true);
-                     addR.setVisible(true);
-                     addD.setVisible(false);
-                     gCB.setVisible(true);
-                            
-                            
-                     addD.setVisible(false);
-                     pBB.setVisible(false);
-                     rSB.setVisible(false);
-                            
-                            
-                            
-                            
-                }
-                 
-                        
-                //For Clear Button 
-                if (e.getSource() == cButton) {
-                    iDTF.setText(""); // Clearing the Enrollment ID field
-                    sNTF.setText("");
-                    cNTF.setText("");
-                    cDTF.setText("");
-                    tFTF.setText("");
-                    nOCHTF.setText("");
-                    dPTF.setText("");
-                    nORMTF.setText("");
-                    nOMATF.setText("");
-                    nOMTF.setText("");
-                    
-                    
-                    // Clearing the combo boxes
-                    dayComboBox.setSelectedIndex(-1);
-                    monthComboBox.setSelectedIndex(-1);
-                    yearComboBox.setSelectedIndex(-1);
-                    
-                    
-                    daysComboBox.setSelectedIndex(-1);
-                    monthsComboBox.setSelectedIndex(-1);
-                    yearsComboBox.setSelectedIndex(-1);
-                    
-                    
-                    dayDODComboBox.setSelectedIndex(-1);
-                    monthDODComboBox.setSelectedIndex(-1);
-                    yearDODComboBox.setSelectedIndex(-1);
-                    
-                }
-                    
-                // For Calculate Present Percentage Button 
-                       
-                if (e.getSource() == cPPB) {
-                    hL.setVisible(false);
-                    leftPanel.setVisible(false);
-                    rtPanel.setVisible(false);
-                    cPPPanel.setVisible(true);
+            
+        } else{
+             SwingUtilities.invokeLater(() -> switchPanel1(false));
+            
+            
+        }
+        /*
+        //For Grant Certificate Button 
+        if (e.getSource() == gCB){
+            switchPanel2(true);
+        }else{
+            switchPanel2(false);
+        } */
+        
+        //For CloseP Button 
+        if (e.getSource() == closeP){
+             switchPanel1(true);
+        }else{
+            switchPanel1(false);
+        }
+        
+        //For add Regular Student button   
+        if (e.getSource() == addR) {
+           if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0 || cD.length() == 0 ) {
+                    JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    hL.setVisible(true);
-                    leftPanel.setVisible(true);
-                    rtPanel.setVisible(true);
-                    cPPPanel.setVisible(false);
-                }
-                
-                
-        
-                        
-                        
-                
-                
-                
-                //For add Regular Student button   
-             if (e.getSource() == addR) {
+                try {
+                    // Create a new Regular object and add it to the arrList
+                    Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
                     
-                    if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0 || cD.length() == 0 ) {
-                        JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        try {
-                            // Create a new Regular object and add it to the arrList
-                            Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
-                            
-                            // Check for duplicate enrollment ID
-                            boolean enID = false;
-                            for (Student student : arrList) {
-                                if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
-                                    enID = true;
-                                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
-                                    break; // Exit the loop, no need to check further
-                                }
-                            }
-                
-                            if (!enID) {
-                                arrList.add(newRegularStudent);
-                                JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
-                            }
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in field marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
+                    // Check for duplicate enrollment ID
+                    boolean enID = false;
+                    for (Student student : arrList) {
+                        if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
+                            enID = true;
+                            JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
+                            break; // Exit the loop, no need to check further
                         }
                     }
-             }
-               
-
-
-                        
-                // For add  Dropout Student button
-             if (e.getSource() == addD) {
-                      if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || dOD.length() == 0 || dOE.length() == 0 || cD.length() == 0 || nORM.length() == 0 || nOMA.length() == 0) {
-                            JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
-                        } else {
-                            try {
-                                Dropout newDropoutStudent = new Dropout(sN, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nORM), Integer.parseInt(nOMA), dOD, Integer.parseInt(iD), cN, dOE, dOB);
-                                boolean enID = false;
-                                for (Student student : arrList) {
-                                    if (student.getEnrollmentID() == newDropoutStudent.getEnrollmentID()) {
-                                        enID = true;
-                                        JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newDropoutStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
-                                        break;
-                                    }
-                                }
-                                if (!enID) {
-                                    arrList.add(newDropoutStudent);
-                                    JOptionPane.showMessageDialog(newFrame, sN + " is added as a Dropout Student!");
-                                }
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in fields marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);   
-                     }   
-                  }}
-             
         
-        
-        
-            if (e.getSource() == book) {
-                String enrollmentIdStr = iDTF.getText();
-                String daysPresentStr = dPTF.getText();
-            
-                if (enrollmentIdStr.isEmpty() || daysPresentStr.isEmpty()) {
-                    JOptionPane.showMessageDialog(newFrame, "Please fill in both Enrollment ID and Days Present.", "Error", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    try {
-                        int enrollmentId = Integer.parseInt(enrollmentIdStr);
-                        int daysPresent = Integer.parseInt(daysPresentStr);
-            
-                        boolean studentFound = false;
-                        for (Student student : arrList) {
-                            if (student.getEnrollmentID() == enrollmentId) {
-                                if (student instanceof Regular) {
-                                    Regular regularStudent = (Regular) student;
-                                    regularStudent.setDaysPresent(daysPresent); // Set the days present for the student
-                                    
-                                    String attendanceGrade = regularStudent.presentPercentage(); // Calculate the present percentage and get the attendance grade
-                                    String message = "Attendance Grade for Enrollment ID " + enrollmentId + ": " + attendanceGrade;
-                                    JOptionPane.showMessageDialog(newFrame, regularStudent.presentPercentage(), "Attendance Grade", JOptionPane.INFORMATION_MESSAGE);
-                                    studentFound = true;
-                                    break;
-                                } else {                                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + enrollmentId + " does not belong to a Regular Student.", "Invalid Student", JOptionPane.WARNING_MESSAGE);
-                                    studentFound = true;
-                                    break;
-                                }
-                            }
-                        }
-            
-                        if (!studentFound) {
-                            JOptionPane.showMessageDialog(newFrame, "Student with Enrollment ID " + enrollmentId + " not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
-                        }
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(newFrame, "Please enter valid numeric values.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    if (!enID) {
+                        arrList.add(newRegularStudent);
+                        JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
                     }
+                 } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in field marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
                 }
             }
-
-                
-                
-                
-                
-                
-                
-                
-                
-                //For CloseP Button 
-                if (e.getSource() == closeP){
-                    cPPPanel.setVisible(false);
-                    leftPanel.setVisible(true);
-                    rtPanel.setVisible(true);
-                }
-                
-               
-                // For Display Button
-                if (e.getSource() == dButton) {
-                    if (arrList.isEmpty()) {
-                        JOptionPane.showMessageDialog(newFrame, "No Fields to Display", "ArrayList is Empty", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                        for (Student list : arrList) {
-                            if (list instanceof Regular) {
-                                System.out.println("\n\n");
-                                Regular regularStudent = (Regular) list;
-                                regularStudent.display();
-                
-                            } else if (list instanceof Dropout) {
-                                System.out.println("\n\n");
-                                Dropout dropoutStudent = (Dropout) list;
-                                dropoutStudent.display();
+         }  
+         
+        // For add  Dropout Student button
+        if (e.getSource() == addD) {
+              if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || dOD.length() == 0 || dOE.length() == 0 || cD.length() == 0 || nORM.length() == 0 || nOMA.length() == 0) {
+                    JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    try {
+                        Dropout newDropoutStudent = new Dropout(sN, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nORM), Integer.parseInt(nOMA), dOD, Integer.parseInt(iD), cN, dOE, dOB);
+                        boolean enID = false;
+                        for (Student student : arrList) {
+                            if (student.getEnrollmentID() == newDropoutStudent.getEnrollmentID()) {
+                                enID = true;
+                                JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newDropoutStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
+                                break;
                             }
                         }
+                        if (!enID) {
+                            arrList.add(newDropoutStudent);
+                            JOptionPane.showMessageDialog(newFrame, sN + " is added as a Dropout Student!");
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in fields marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);   
+             }   
+          }
+        }
+        
+        //For Book Button to Calculate Present Percentage 
+        if (e.getSource() == book) {
+            String enrollmentIdStr = iDTF.getText();
+            String daysPresentStr = dPTF.getText();
+            if (enrollmentIdStr.isEmpty() || daysPresentStr.isEmpty()) {
+                JOptionPane.showMessageDialog(newFrame, "Please fill in both Enrollment ID and Days Present.", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    int enrollmentId = Integer.parseInt(enrollmentIdStr);
+                    int daysPresent = Integer.parseInt(daysPresentStr);
+        
+                    boolean studentFound = false;
+                    for (Student student : arrList) {
+                        if (student.getEnrollmentID() == enrollmentId) {
+                            if (student instanceof Regular) {
+                                Regular regularStudent = (Regular) student;
+                                regularStudent.setDaysPresent(daysPresent); // Set the days present for the student
+                                
+                                String attendanceGrade = regularStudent.presentPercentage(); // Calculate the present percentage and get the attendance grade
+                                String message = "Attendance Grade for Enrollment ID " + enrollmentId + ": " + attendanceGrade;
+                                JOptionPane.showMessageDialog(newFrame, regularStudent.presentPercentage(), "Attendance Grade", JOptionPane.INFORMATION_MESSAGE);
+                                studentFound = true;
+                                break;
+                            } else {                                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + enrollmentId + " does not belong to a Regular Student.", "Invalid Student", JOptionPane.WARNING_MESSAGE);
+                                studentFound = true;
+                                break;
+                            }
+                        }
+                    }
+        
+                    if (!studentFound) {
+                        JOptionPane.showMessageDialog(newFrame, "Student with Enrollment ID " + enrollmentId + " not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(newFrame, "Please enter valid numeric values.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        
+             
+        // For Display Button
+        if (e.getSource() == dButton) {
+            if (arrList.isEmpty()) {
+                JOptionPane.showMessageDialog(newFrame, "No Fields to Display", "ArrayList is Empty", JOptionPane.WARNING_MESSAGE);
+            } else {
+                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                for (Student list : arrList) {
+                    if (list instanceof Regular) {
                         System.out.println("\n\n");
-                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                        Regular regularStudent = (Regular) list;
+                        regularStudent.display();
+        
+                    } else if (list instanceof Dropout) {
+                        System.out.println("\n\n");
+                        Dropout dropoutStudent = (Dropout) list;
+                        dropoutStudent.display();
                     }
                 }
-        
+                System.out.println("\n\n");
+                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+            }
+        }
     }
-    }
+    
+    
+}
 
 
