@@ -624,7 +624,7 @@ public class StudentGUI implements ActionListener{
         }
         aDropout = i;
     }
-    //int to string 
+    
         private void convertString() {
         // For retriving selected item for Regular Student  
         iD = iDTF.getText().trim();
@@ -662,6 +662,8 @@ public class StudentGUI implements ActionListener{
         
         dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
     }
+    
+         
 
     //Creating a method to clear fields 
     
@@ -741,7 +743,7 @@ public class StudentGUI implements ActionListener{
      
     //Action Listener    
         public void actionPerformed(ActionEvent e){
-        
+        convertString();
         boolean a; //Intializing boolean for toggleMenu
         boolean showHide;
         //For Switching between Regular Student and Dropout Student         
@@ -826,41 +828,37 @@ public class StudentGUI implements ActionListener{
         }
            
         //For add Regular Student button   
-if (e.getSource() == addR) {
-    convertString();
-    if (iD.length() == 0 || dOB.length() == 0 || cN.length() == 0 || sN.length() == 0 || dOE.length() == 0 || cD.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 ||dP.length() == 0 ) {
-        JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
-    } else {
-        try {
-            // Create a new Regular object and add it to the arrList
-            Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
-                    
-            // Check for duplicate enrollment ID
-            boolean enID = false;
-            for (Student student : arrList) {
-                if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
-                    enID = true;
-                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
-                    
-                    break; // Exit the loop, no need to check further
+        if (e.getSource() == addR) {
+            
+            if (iD.length() == 0 || dOB.length() == 0 || cN.length() == 0 || sN.length() == 0 || dOE.length() == 0 || cD.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 ||dP.length() == 0 ) {
+                JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    // Create a new Regular object and add it to the arrList
+                    Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
+                            
+                    // Check for duplicate enrollment ID
+                    boolean enID = false;
+                    for (Student student : arrList) {
+                        if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
+                            enID = true;
+                            JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
+                            break; // Exit the loop, no need to check further
+                        }
+                    }
+                    if (!enID) {
+                        arrList.add(newRegularStudent);
+                        JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(newFrame, "Error adding student: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        
-
-            if (!enID) {
-                arrList.add(newRegularStudent);
-                JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(newFrame, "Error adding student: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-}
 
          
         // For add  Dropout Student button
         if (e.getSource() == addD) {
-            convertString();
               if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || dOD.length() == 0 || dOE.length() == 0 || cD.length() == 0 || nORM.length() == 0 || nOMA.length() == 0) {
                     JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
                 } else {
@@ -942,8 +940,6 @@ if (e.getSource() == addR) {
         //For CloseP Button 
         if (e.getSource() == closeP){
              hide(false);
-             
-        
         }
         
              
@@ -970,8 +966,6 @@ if (e.getSource() == addR) {
             }
         }
     }
-    
-    
 }
 
 
