@@ -625,45 +625,44 @@ public class StudentGUI implements ActionListener{
         aDropout = i;
     }
     //int to string 
-    private void convertString(){
-        //For retriving selected item for Regular Student  
-        String iD = iDTF.getText();
-        String sN = sNTF.getText();
+        private void convertString() {
+        // For retriving selected item for Regular Student  
+        iD = iDTF.getText().trim();
+        sN = sNTF.getText().trim();
         
         // Get the selected date of birth from the JComboBoxes
-        String dayOfBirth = (String) dayComboBox.getSelectedItem();
-        String monthOfBirth = (String) monthComboBox.getSelectedItem();
-        String yearOfBirth = (String) yearComboBox.getSelectedItem();
+        String dayOfBirth = (String) dayComboBox.getSelectedItem().toString().trim();
+        String monthOfBirth = (String) monthComboBox.getSelectedItem().toString().trim();
+        String yearOfBirth = (String) yearComboBox.getSelectedItem().toString().trim();
         
-        String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
+        dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
         
-        String cN = cNTF.getText();
-        String cD = cDTF.getText();
-        String tF = tFTF.getText();
-        String nOM = nOMTF.getText();
-        String nOCH = nOCHTF.getText();
-        String dP = dPTF.getText();
+        cN = cNTF.getText().trim();
+        cD = cDTF.getText().trim();
+        tF = tFTF.getText().trim();
+        nOM = nOMTF.getText().trim();
+        nOCH = nOCHTF.getText().trim();
+        dP = dPTF.getText().trim();
         
         // Get the selected date of enrollment from the JComboBoxes
-        String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
-        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
-        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
+        String dayOfEnrollment = (String) daysComboBox.getSelectedItem().toString().trim();
+        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem().toString().trim();
+        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem().toString().trim();
         
-        String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
+        dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
         
-        //For retriving additional selected item for Dropout Student
-        String nORM =nORMTF.getText();
-        String nOMA = nOMATF.getText();
+        // For retriving additional selected item for Dropout Student
+        nORM =nORMTF.getText().trim();
+        nOMA = nOMATF.getText().trim();
         
         // Get the selected date of dropout from the JComboBoxes
-        String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
-        String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
-        String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
+        String dayOfDropout = (String) dayDODComboBox.getSelectedItem().toString().trim();
+        String monthOfDropout = (String) monthDODComboBox.getSelectedItem().toString().trim();
+        String yearOfDropout = (String) yearDODComboBox.getSelectedItem().toString().trim();
         
-        String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
-        
-    
+        dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
     }
+
     //Creating a method to clear fields 
     private void clearTF(boolean clear){
         
@@ -746,7 +745,7 @@ public class StudentGUI implements ActionListener{
      
     //Action Listener    
         public void actionPerformed(ActionEvent e){
-        convertString();
+        
         boolean a; //Intializing boolean for toggleMenu
         boolean showHide;
         //For Switching between Regular Student and Dropout Student         
@@ -829,9 +828,8 @@ public class StudentGUI implements ActionListener{
         }
            
         //For add Regular Student button   
-        if (e.getSource() == addR) {
-    if (iD == null || iD.trim().isEmpty()|| sN == null || sN.trim().isEmpty() || dOB == null || dOB.trim().isEmpty()||  cN == null || cN.trim().isEmpty() ||  tF == null || tF.trim().isEmpty()|| 
-    nOM == null || nOM.trim().isEmpty() ||  nOCH == null || nOCH.trim().isEmpty() ||  dP == null || dP.trim().isEmpty() || dOE == null || dOE.trim().isEmpty() ||  cD == null || cD.trim().isEmpty() ) {
+if (e.getSource() == addR) {
+    if (iD.length() == 0) {
         JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
     } else {
         try {
