@@ -25,19 +25,19 @@ public class StudentGUI implements ActionListener{
     
     ArrayList<Student> arrList = new ArrayList<Student>();
     
-    private String iD;
-    private String sN;
-    private String cN;
-    private String cD;
-    private String tF;
-    private String nOM;
-    private String nOCH;
-    private String dP;
-    private String nORM;
-    private String nOMA;
-    private String dOB;
-    private String dOE;
-    private String dOD;
+    private String iD = "";
+    private String sN= "";
+    private String cN= "";
+    private String cD= "";
+    private String tF= "";
+    private String nOM= "";
+    private String nOCH= "";
+    private String dP= "";
+    private String nORM= "";
+    private String nOMA= "";
+    private String dOB= "";
+    private String dOE= "";
+    private String dOD= "";
     private String dayOfBirth;
     private String monthOfBirth;
     private String yearOfBirth;
@@ -664,14 +664,10 @@ public class StudentGUI implements ActionListener{
     }
 
     //Creating a method to clear fields 
-    private void clearTF(boolean clear){
-        
-            
-        
-    }
+    
     
     //Creating a method to clear Combobox
-    private void clearComboBox(){
+    private void clearCB(){
         //Clearing the combo boxes
         
         dayComboBox.setSelectedIndex(-1);
@@ -752,6 +748,7 @@ public class StudentGUI implements ActionListener{
         if(toggleMenu.isSelected()){
             a = true;
             
+            
             hL.setText("DROPOUT STUDENT");
             toggleMenu.setText("<html><font color='white' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
                     
@@ -788,7 +785,8 @@ public class StudentGUI implements ActionListener{
                     
         }else{
             a = false;
-                  
+            
+            clearCB();
             hL.setText("REGULAR STUDENT");
             toggleMenu.setText("<html><font color='white' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
                     
@@ -829,22 +827,24 @@ public class StudentGUI implements ActionListener{
            
         //For add Regular Student button   
 if (e.getSource() == addR) {
-    if (iD.length() == 0) {
+    convertString();
+    if (iD.length() == 0 || dOB.length() == 0 || cN.length() == 0 || sN.length() == 0 || dOE.length() == 0 || cD.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 ||dP.length() == 0 ) {
         JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
     } else {
         try {
             // Create a new Regular object and add it to the arrList
-                    Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
+            Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
                     
-                    // Check for duplicate enrollment ID
-                    boolean enID = false;
-                    for (Student student : arrList) {
-                        if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
-                            enID = true;
-                            JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
-                            break; // Exit the loop, no need to check further
-                        }
-                    }
+            // Check for duplicate enrollment ID
+            boolean enID = false;
+            for (Student student : arrList) {
+                if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
+                    enID = true;
+                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
+                    
+                    break; // Exit the loop, no need to check further
+                }
+            }
         
 
             if (!enID) {
@@ -860,6 +860,7 @@ if (e.getSource() == addR) {
          
         // For add  Dropout Student button
         if (e.getSource() == addD) {
+            convertString();
               if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || dOD.length() == 0 || dOE.length() == 0 || cD.length() == 0 || nORM.length() == 0 || nOMA.length() == 0) {
                     JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
                 } else {
@@ -925,7 +926,6 @@ if (e.getSource() == addR) {
         //For Clear Buttons 
         if (e.getSource() == cButton) {
             
-            
         }
         
         // For Calculate Present Percentage Button    
@@ -942,6 +942,7 @@ if (e.getSource() == addR) {
         //For CloseP Button 
         if (e.getSource() == closeP){
              hide(false);
+             
         
         }
         
