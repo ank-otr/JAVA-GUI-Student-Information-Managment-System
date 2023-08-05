@@ -1,21 +1,13 @@
-public void switchPanel2(boolean showHide2){
-        if(showHide2){
-            switchPanel1(false);
-            hL1.setText("Grant Certificate of Regular Student");
-            cNGCL.setVisible(true);
-            cNGCTF.setVisible(true);
-            dOEGCL.setVisible(true);
-            daysGCComboBox.setVisible(true);
-            monthsGCComboBox.setVisible(true);
-            yearsGCComboBox.setVisible(true);
-        }else{
-            switchPanel1(true);
-            cNGCL.setVisible(false);
-            cNGCTF.setVisible(false);
-            dOEGCL.setVisible(false);
-            daysGCComboBox.setVisible(false);
-            monthsGCComboBox.setVisible(false);
-            yearsGCComboBox.setVisible(false);
-        }
+// Create a new Regular object and add it to the arrList
+                    Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
+                    
+                    // Check for duplicate enrollment ID
+                    boolean enID = false;
+                    for (Student student : arrList) {
+                        if (student.getEnrollmentID() == newRegularStudent.getEnrollmentID()) {
+                            enID = true;
+                            JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + newRegularStudent.getEnrollmentID() + " already taken!", "Error", JOptionPane.WARNING_MESSAGE);
+                            break; // Exit the loop, no need to check further
+                        }
+                    }
         
-    } 

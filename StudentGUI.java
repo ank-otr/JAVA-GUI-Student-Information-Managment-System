@@ -25,8 +25,28 @@ public class StudentGUI implements ActionListener{
     
     ArrayList<Student> arrList = new ArrayList<Student>();
     
-    
-    
+    private String iD;
+    private String sN;
+    private String cN;
+    private String cD;
+    private String tF;
+    private String nOM;
+    private String nOCH;
+    private String dP;
+    private String nORM;
+    private String nOMA;
+    private String dOB;
+    private String dOE;
+    private String dOD;
+    private String dayOfBirth;
+    private String monthOfBirth;
+    private String yearOfBirth;
+    private String dayOfEnrollment;
+    private String monthOfEnrollment;
+    private String yearOfEnrollment;
+    private String dayOfDropout;
+    private String monthOfDropout;
+    private String yearOfDropout;
     
     
     public void StudentGUI(){
@@ -604,28 +624,53 @@ public class StudentGUI implements ActionListener{
         }
         aDropout = i;
     }
+    //int to string 
+    private void convertString(){
+        //For retriving selected item for Regular Student  
+        String iD = iDTF.getText();
+        String sN = sNTF.getText();
+        
+        // Get the selected date of birth from the JComboBoxes
+        String dayOfBirth = (String) dayComboBox.getSelectedItem();
+        String monthOfBirth = (String) monthComboBox.getSelectedItem();
+        String yearOfBirth = (String) yearComboBox.getSelectedItem();
+        
+        String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
+        
+        String cN = cNTF.getText();
+        String cD = cDTF.getText();
+        String tF = tFTF.getText();
+        String nOM = nOMTF.getText();
+        String nOCH = nOCHTF.getText();
+        String dP = dPTF.getText();
+        
+        // Get the selected date of enrollment from the JComboBoxes
+        String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
+        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
+        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
+        
+        String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
+        
+        //For retriving additional selected item for Dropout Student
+        String nORM =nORMTF.getText();
+        String nOMA = nOMATF.getText();
+        
+        // Get the selected date of dropout from the JComboBoxes
+        String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
+        String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
+        String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
+        
+        String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
+        
     
-    //Creating a method to clear fields 
-    private void clearTF(){
-        if(iDTF.length() == 0 || sNTF.length() == 0 || cNTF.length() == 0 || cDTF.length() == 0 || tFTF.length() == 0 || nOCHTF.length() == 0 || dPTF.length() == 0 || 
-            nORMTF.length() == 0 || nOMATF.length() == 0 || nOMTF.length() == 0){
-        iDTF.setText(""); // Clearing the Enrollment ID field
-        sNTF.setText("");
-        cNTF.setText("");
-        cDTF.setText("");
-        tFTF.setText("");
-        nOCHTF.setText("");
-        dPTF.setText("");
-        nORMTF.setText("");
-        nOMATF.setText("");
-        nOMTF.setText("");
-        //iDCPPTF.setText("");
-        //dPCPPTF.setText("");
-        } else{
-            
-            
-        }
     }
+    //Creating a method to clear fields 
+    private void clearTF(boolean clear){
+        
+            
+        
+    }
+    
     //Creating a method to clear Combobox
     private void clearComboBox(){
         //Clearing the combo boxes
@@ -701,42 +746,7 @@ public class StudentGUI implements ActionListener{
      
     //Action Listener    
         public void actionPerformed(ActionEvent e){
-        //For retriving selected item for Regular Student  
-        String iD = iDTF.getText();
-        String sN = sNTF.getText();
-        
-        // Get the selected date of birth from the JComboBoxes
-        String dayOfBirth = (String) dayComboBox.getSelectedItem();
-        String monthOfBirth = (String) monthComboBox.getSelectedItem();
-        String yearOfBirth = (String) yearComboBox.getSelectedItem();
-        
-        String dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
-        
-        String cN = cNTF.getText();
-        String cD = cDTF.getText();
-        String tF = tFTF.getText();
-        String nOM = nOMTF.getText();
-        String nOCH = nOCHTF.getText();
-        String dP = dPTF.getText();
-        
-        // Get the selected date of enrollment from the JComboBoxes
-        String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
-        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
-        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
-        
-        String dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
-        
-        //For retriving additional selected item for Dropout Student
-        String nORM =nORMTF.getText();
-        String nOMA = nOMATF.getText();
-        
-        // Get the selected date of dropout from the JComboBoxes
-        String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
-        String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
-        String yearOfDropout = (String) yearDODComboBox.getSelectedItem();
-        
-        String dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
-        
+        convertString();
         boolean a; //Intializing boolean for toggleMenu
         boolean showHide;
         //For Switching between Regular Student and Dropout Student         
@@ -818,36 +828,14 @@ public class StudentGUI implements ActionListener{
                     
         }
            
-        //For Clear Buttons 
-        if (e.getSource() == cButton) {
-            clearTF();
-            clearComboBox();
-        }
-        
-        // For Calculate Present Percentage Button    
-        if (e.getSource() == cPPB) {
-             cPPV(true);
-                        
-            
-        } else{
-             cPPV(false);
-            
-            
-        }
-        
-        //For CloseP Button 
-        if (e.getSource() == closeP){
-             hide(false);
-        
-        }
-        
         //For add Regular Student button   
         if (e.getSource() == addR) {
-           if (iD.length() == 0 || sN.length() == 0 || dOB.length() == 0 || cN.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 || dP.length() == 0 || dOE.length() == 0 || cD.length() == 0 ) {
-                    JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
-                } else {
-                try {
-                    // Create a new Regular object and add it to the arrList
+    if (iD == null || iD.trim().isEmpty()|| sN == null || sN.trim().isEmpty() || dOB == null || dOB.trim().isEmpty()||  cN == null || cN.trim().isEmpty() ||  tF == null || tF.trim().isEmpty()|| 
+    nOM == null || nOM.trim().isEmpty() ||  nOCH == null || nOCH.trim().isEmpty() ||  dP == null || dP.trim().isEmpty() || dOE == null || dOE.trim().isEmpty() ||  cD == null || cD.trim().isEmpty() ) {
+        JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
+    } else {
+        try {
+            // Create a new Regular object and add it to the arrList
                     Regular newRegularStudent = new Regular(Integer.parseInt(iD), dOB, cN, sN, dOE, Integer.parseInt(cD), Integer.parseInt(tF), Integer.parseInt(nOM), Integer.parseInt(nOCH), Integer.parseInt(dP));
                     
                     // Check for duplicate enrollment ID
@@ -860,15 +848,17 @@ public class StudentGUI implements ActionListener{
                         }
                     }
         
-                    if (!enID) {
-                        arrList.add(newRegularStudent);
-                        JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
-                    }
-                 } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in field marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);
-                }
+
+            if (!enID) {
+                arrList.add(newRegularStudent);
+                JOptionPane.showMessageDialog(newFrame, sN + " is added as a Regular Student!");
             }
-         }  
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(newFrame, "Error adding student: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
          
         // For add  Dropout Student button
         if (e.getSource() == addD) {
@@ -910,7 +900,7 @@ public class StudentGUI implements ActionListener{
                     for (Student student : arrList) {
                         if (student.getEnrollmentID() == enrollmentId) {
                             if (student instanceof Regular) {
-                                Regular regularStudent = (Regular) student;
+                                Regular regularStudent = (Regular)student;
                                 regularStudent.setDaysPresent(daysPresent); // Set the days present for the student
                                 
                                 String attendanceGrade = regularStudent.presentPercentage(); // Calculate the present percentage and get the attendance grade
@@ -933,7 +923,29 @@ public class StudentGUI implements ActionListener{
                 }
             }
         }
-
+        
+        //For Clear Buttons 
+        if (e.getSource() == cButton) {
+            
+            
+        }
+        
+        // For Calculate Present Percentage Button    
+        if (e.getSource() == cPPB) {
+             cPPV(true);
+                        
+            
+        } else{
+             cPPV(false);
+            
+            
+        }
+        
+        //For CloseP Button 
+        if (e.getSource() == closeP){
+             hide(false);
+        
+        }
         
              
         // For Display Button
