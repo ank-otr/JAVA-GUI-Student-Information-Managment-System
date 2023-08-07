@@ -8,9 +8,9 @@ public class StudentGUI implements ActionListener{
     
     private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPPL, dPCPPL, hL1, cNGCL, dOEGCL;
     
-    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF, cNGCTF, iDGCTF;
+    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF, cNGCTF, iDGCTF, iDPBTF;
     
-    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clear,book, book2;
+    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clear,book, book2, pay;
     
     private JToggleButton toggleMenu;
     
@@ -451,6 +451,7 @@ public class StudentGUI implements ActionListener{
         pBB.setText("Pay Bills");
         pBB.setBounds(150,175,150,50);
         pBB.setForeground(new Color(66,133,244));
+        pBB.addActionListener(this);
         rtPanel.add(pBB);
         
         
@@ -459,6 +460,7 @@ public class StudentGUI implements ActionListener{
         rSB.setText("Remove Student");
         rSB.setBounds(150,250,150,50);
         rSB.setForeground(new Color(66,133,244));
+        rSB.addActionListener(this);
         rtPanel.add(rSB);
         
         
@@ -590,6 +592,14 @@ public class StudentGUI implements ActionListener{
         bPanel.add(iDGCTF);
         
         bPanel.add(iDCPPTF);
+        
+        iDPBTF = new JTextField();
+        iDPBTF.setBounds(190, 90, 250, 25);
+        iDPBTF.setBackground(new Color(190,195,198));
+        iDPBTF.setFont(new Font("Monospaced", Font.BOLD,20));
+        bPanel.add(iDPBTF);
+        
+        bPanel.add(iDCPPTF);
         //Creating Book button for Calulate Present Pecentage
         book2 = new JButton();
         book2.setText("Book");
@@ -598,6 +608,14 @@ public class StudentGUI implements ActionListener{
         book2.addActionListener(this);
         book2.setVisible(false);
         bPanel.add(book2);
+        
+        pay = new JButton();
+        pay.setText("Pay");
+        pay.setForeground(new Color(66,133,244));
+        pay.setBounds(280, 250, 100,50);
+        pay.addActionListener(this);
+        pay.setVisible(false);
+        bPanel.add(pay);
         
         // Adding a Window Listener to the JFrame newFrame to handle the window closing event
         newFrame.addWindowListener(new WindowAdapter() {
@@ -661,8 +679,8 @@ public class StudentGUI implements ActionListener{
          iDCPPTF.setText("");
          dPCPPTF.setText("");
          cNGCTF.setText("");
-        
-        
+         iDPBTF.setText("");
+         iDGCTF.setText("");
         
         //Clearing the combo boxes
         
@@ -764,6 +782,35 @@ public class StudentGUI implements ActionListener{
             monthsGCComboBox.setVisible(false);
             yearsGCComboBox.setVisible(false);
             dOEGCL.setVisible(false);
+            
+        }
+    }
+    
+    public void pBV(boolean showHide2){
+        if(showHide2){
+            hide(true);
+            hL1.setText("Pay Bills");
+            iDCPPL.setVisible(true);
+            iDCPPTF.setVisible(false);
+            cNGCL.setVisible(false);
+            cNGCTF.setVisible(false);
+            iDPBTF.setVisible(true);
+            dPCPPTF.setVisible(false);
+            dPCPPL.setVisible(false);
+            book.setVisible(false);
+            iDGCTF.setVisible(false);
+            book2.setVisible(false);
+            pay.setVisible(true);
+            daysGCComboBox.setVisible(false);
+            monthsGCComboBox.setVisible(false);
+            yearsGCComboBox.setVisible(false);
+            dOEGCL.setVisible(false);
+        }
+        else{
+            hide(false);
+            iDCPPL.setVisible(false);
+            iDPBTF.setVisible(false);
+            pay.setVisible(false);
         }
     }
     
@@ -1065,6 +1112,9 @@ public class StudentGUI implements ActionListener{
 
         }
         
+        if(e.getSource() == pBB){
+            pBV(true);
+        }
         
         
         // For Calculate Present Percentage Button    
