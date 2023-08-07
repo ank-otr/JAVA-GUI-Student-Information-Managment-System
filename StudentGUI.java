@@ -25,20 +25,20 @@ public class StudentGUI implements ActionListener{
     
     ArrayList<Student> arrList = new ArrayList<Student>();
     
-    private String iD = "";
-    private String sN= "";
-    private String cN= "";
-    private String cD= "";
-    private String tF= "";
-    private String nOM= "";
-    private String nOCH= "";
-    private String dP= "";
-    private String nORM= "";
-    private String nOMA= "";
-    private String dOB= "";
-    private String dOE= "";
-    private String dOD= "";
-    private String dayOfBirth;
+    private String iD ;
+    private String sN;
+    private String cN;
+    private String cD;
+    private String tF;
+    private String nOM;
+    private String nOCH;
+    private String dP;
+    private String nORM;
+    private String nOMA;
+    private String dOB;
+    private String dOE;
+    private String dOD;
+    private String dayOfBirth ;
     private String monthOfBirth;
     private String yearOfBirth;
     private String dayOfEnrollment;
@@ -625,43 +625,7 @@ public class StudentGUI implements ActionListener{
         aDropout = i;
     }
     
-        private void convertString() {
-        // For retriving selected item for Regular Student  
-        iD = iDTF.getText().trim();
-        sN = sNTF.getText().trim();
-        
-        // Get the selected date of birth from the JComboBoxes
-        String dayOfBirth = (String) dayComboBox.getSelectedItem().toString().trim();
-        String monthOfBirth = (String) monthComboBox.getSelectedItem().toString().trim();
-        String yearOfBirth = (String) yearComboBox.getSelectedItem().toString().trim();
-        
-        dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
-        
-        cN = cNTF.getText().trim();
-        cD = cDTF.getText().trim();
-        tF = tFTF.getText().trim();
-        nOM = nOMTF.getText().trim();
-        nOCH = nOCHTF.getText().trim();
-        dP = dPTF.getText().trim();
-        
-        // Get the selected date of enrollment from the JComboBoxes
-        String dayOfEnrollment = (String) daysComboBox.getSelectedItem().toString().trim();
-        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem().toString().trim();
-        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem().toString().trim();
-        
-        dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
-        
-        // For retriving additional selected item for Dropout Student
-        nORM =nORMTF.getText().trim();
-        nOMA = nOMATF.getText().trim();
-        
-        // Get the selected date of dropout from the JComboBoxes
-        String dayOfDropout = (String) dayDODComboBox.getSelectedItem().toString().trim();
-        String monthOfDropout = (String) monthDODComboBox.getSelectedItem().toString().trim();
-        String yearOfDropout = (String) yearDODComboBox.getSelectedItem().toString().trim();
-        
-        dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
-    }
+      
     
          
 
@@ -743,7 +707,44 @@ public class StudentGUI implements ActionListener{
      
     //Action Listener    
         public void actionPerformed(ActionEvent e){
-        convertString();
+        // For retriving selected item for Regular Student  
+        iD = iDTF.getText().trim();
+        sN = sNTF.getText().trim();
+        
+        // Get the selected date of birth from the JComboBoxes
+        String dayOfBirth = (dayComboBox.getSelectedItem() != null) ? dayComboBox.getSelectedItem().toString() : "";
+        String monthOfBirth = (monthComboBox.getSelectedItem() != null) ? monthComboBox.getSelectedItem().toString() : "";
+        String yearOfBirth = (yearComboBox.getSelectedItem() != null) ? yearComboBox.getSelectedItem().toString() : "";
+        System.out.println("Selected day of birth: " + dayOfBirth);
+        System.out.println("Selected month of birth: " + monthOfBirth);
+        System.out.println("Selected year of birth: " + yearOfBirth);
+
+        dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
+        System.out.println("Formatted date of birth: " + dOB);
+        cN = cNTF.getText().trim();
+        cD = cDTF.getText().trim();
+        tF = tFTF.getText().trim();
+        nOM = nOMTF.getText().trim();
+        nOCH = nOCHTF.getText().trim();
+        dP = dPTF.getText().trim();
+        
+        // Get the selected date of enrollment from the JComboBoxes
+        String dayOfEnrollment = (daysComboBox.getSelectedItem() != null) ? daysComboBox.getSelectedItem().toString() : "";
+        String monthOfEnrollment = (monthsComboBox.getSelectedItem() != null) ? monthsComboBox.getSelectedItem().toString() : "";
+        String yearOfEnrollment = (yearsComboBox.getSelectedItem() != null) ? yearsComboBox.getSelectedItem().toString() : "";
+        
+        dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
+        
+        // For retriving additional selected item for Dropout Student
+        nORM =nORMTF.getText().trim();
+        nOMA = nOMATF.getText().trim();
+        
+        // Get the selected date of dropout from the JComboBoxes
+        String dayOfDropout = (dayDODComboBox.getSelectedItem() != null) ? dayDODComboBox.getSelectedItem().toString() : "";
+        String monthOfDropout = (monthDODComboBox.getSelectedItem() != null) ? monthDODComboBox.getSelectedItem().toString() : "";
+        String yearOfDropout = (yearDODComboBox.getSelectedItem() != null) ? yearDODComboBox.getSelectedItem().toString() : "";
+        
+        dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
         boolean a; //Intializing boolean for toggleMenu
         boolean showHide;
         //For Switching between Regular Student and Dropout Student         
@@ -786,6 +787,8 @@ public class StudentGUI implements ActionListener{
                   
                     
         }else{
+            
+            
             a = false;
             
             clearCB();
@@ -829,6 +832,8 @@ public class StudentGUI implements ActionListener{
            
         //For add Regular Student button   
         if (e.getSource() == addR) {
+            System.out.println("Button is clicked");
+            
             
             if (iD.length() == 0 || dOB.length() == 0 || cN.length() == 0 || sN.length() == 0 || dOE.length() == 0 || cD.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 ||dP.length() == 0 ) {
                 JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
