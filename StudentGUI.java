@@ -710,10 +710,18 @@ public class StudentGUI implements ActionListener{
             hide(true);
             hL1.setText("Calculate Present Percentage");
             iDCPPL.setVisible(true);
+            iDGCTF.setVisible(false);
             iDCPPTF.setVisible(true);
             dPCPPL.setVisible(true);
             dPCPPTF.setVisible(true);
             book.setVisible(true);
+            cNGCL.setVisible(false);
+            cNGCTF.setVisible(false);
+            daysGCComboBox.setVisible(false);
+            monthsGCComboBox.setVisible(false);
+            yearsGCComboBox.setVisible(false);
+            dOEGCL.setVisible(false);
+
             
         }else{
             hide(false);
@@ -768,8 +776,8 @@ public class StudentGUI implements ActionListener{
     //Action Listener    
         public void actionPerformed(ActionEvent e){
         // For retriving selected item for Regular Student  
-        iD = iDTF.getText().trim();
-        sN = sNTF.getText().trim();
+        String iD = iDTF.getText().trim();
+        String sN = sNTF.getText().trim();
         
         // Get the selected date of birth from the JComboBoxes
         String dayOfBirth = (String) dayComboBox.getSelectedItem();
@@ -778,13 +786,15 @@ public class StudentGUI implements ActionListener{
         
         dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
         
-        cN = cNTF.getText().trim();
-        cD = cDTF.getText().trim();
-        tF = tFTF.getText().trim();
-        nOM = nOMTF.getText().trim();
-        nOCH = nOCHTF.getText().trim();
-        dP = dPTF.getText().trim();
+        String cN = cNTF.getText().trim();
+        String cD = cDTF.getText().trim();
+        String tF = tFTF.getText().trim();
+        String nOM = nOMTF.getText().trim();
+        String nOCH = nOCHTF.getText().trim();
+        String dP = dPTF.getText().trim();
         
+        String iDCP = iDCPPTF.getText().trim();
+        String dPCP = dPCPPTF.getText().trim();
         // Get the selected date of enrollment from the JComboBoxes
         String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
         String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
@@ -793,8 +803,8 @@ public class StudentGUI implements ActionListener{
         dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
         
         // For retriving additional selected item for Dropout Student
-        nORM =nORMTF.getText().trim();
-        nOMA = nOMATF.getText().trim();
+        String nORM =nORMTF.getText().trim();
+        String nOMA = nOMATF.getText().trim();
         
         // Get the selected date of dropout from the JComboBoxes
         String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
@@ -956,8 +966,10 @@ public class StudentGUI implements ActionListener{
         
         //For Book Button to Calculate Present Percentage 
         if (e.getSource() == book) {
-            String enrollmentIdStr = iDTF.getText();
-            String daysPresentStr = dPTF.getText();
+            String enrollmentIdStr = iDCP;
+            String daysPresentStr = dPCP;
+            
+            
             if (enrollmentIdStr.isEmpty() || daysPresentStr.isEmpty()) {
                 JOptionPane.showMessageDialog(newFrame, "Please fill in both Enrollment ID and Days Present.", "Error", JOptionPane.WARNING_MESSAGE);
             } else {
