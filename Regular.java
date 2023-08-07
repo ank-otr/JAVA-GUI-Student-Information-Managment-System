@@ -81,12 +81,12 @@ public class Regular extends Student {
     }
     
     
-    public String grantCertificate(String courseName, int enrollmentId, String dateOfEnrollment) {
+    public void grantCertificate(String courseName, int enrollmentId, String dateOfEnrollment) {
      String message ="The Student has graduated from " + courseName + " with enrollment ID " + enrollmentId + " and date of enrollment " + dateOfEnrollment;
      if (isGrantedScholarship) {
                 System.out.println("The scholarship has been granted.");
     }
-    return message;
+    System.out.println(message);
     }
     
     public void display(){

@@ -19,5 +19,5 @@ comment7.target=void\ setDaysPresent(double)
 comment8.params=
 comment8.target=java.lang.String\ presentPercentage()
 comment9.params=courseName\ enrollmentId\ dateOfEnrollment
-comment9.target=java.lang.String\ grantCertificate(java.lang.String,\ int,\ java.lang.String)
+comment9.target=void\ grantCertificate(java.lang.String,\ int,\ java.lang.String)
 numComments=11

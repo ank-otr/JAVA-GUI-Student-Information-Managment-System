@@ -8,9 +8,9 @@ public class StudentGUI implements ActionListener{
     
     private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPPL, dPCPPL, hL1, cNGCL, dOEGCL;
     
-    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF, cNGCTF;
+    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF, cNGCTF, iDGCTF;
     
-    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clear,book;
+    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clear,book, book2;
     
     private JToggleButton toggleMenu;
     
@@ -47,6 +47,8 @@ public class StudentGUI implements ActionListener{
     private String dayOfDropout;
     private String monthOfDropout;
     private String yearOfDropout;
+    private String dOEGC;
+    
     
     
     public void StudentGUI(){
@@ -572,13 +574,30 @@ public class StudentGUI implements ActionListener{
         }
         yearsGCComboBox = new JComboBox<>(yearsGC);
         yearsGCComboBox.setBounds(320,193,90,21);
+        
         daysGCComboBox.setVisible(false);
         monthsGCComboBox.setVisible(false);
         yearsGCComboBox.setVisible(false);
+        
         bPanel.add(daysGCComboBox);
         bPanel.add(monthsGCComboBox);
         bPanel.add(yearsGCComboBox);
         
+        iDGCTF = new JTextField();
+        iDGCTF.setBounds(190, 90, 250, 25);
+        iDGCTF.setBackground(new Color(190,195,198));
+        iDGCTF.setFont(new Font("Monospaced", Font.BOLD,20));
+        bPanel.add(iDGCTF);
+        
+        bPanel.add(iDCPPTF);
+        //Creating Book button for Calulate Present Pecentage
+        book2 = new JButton();
+        book2.setText("Book");
+        book2.setForeground(new Color(66,133,244));
+        book2.setBounds(280, 250, 100,50);
+        book2.addActionListener(this);
+        book2.setVisible(false);
+        bPanel.add(book2);
         
         // Adding a Window Listener to the JFrame newFrame to handle the window closing event
         newFrame.addWindowListener(new WindowAdapter() {
@@ -625,15 +644,26 @@ public class StudentGUI implements ActionListener{
         aDropout = i;
     }
     
-      
-    
-         
-
-    //Creating a method to clear fields 
-    
-    
-    //Creating a method to clear Combobox
-    private void clearCB(){
+    //Creating a method to Clear Text fields and Combobox
+    private void clear(){
+        //Clearing Text Fields 
+        
+         iDTF.setText("");
+         sNTF.setText("");
+         cNTF.setText("");
+         cDTF.setText("");
+         tFTF.setText("");
+         nOMTF.setText("");
+         nOCHTF.setText("");
+         dPTF.setText("");
+         nORMTF.setText("");
+         nOMATF.setText("");
+         iDCPPTF.setText("");
+         dPCPPTF.setText("");
+         cNGCTF.setText("");
+        
+        
+        
         //Clearing the combo boxes
         
         dayComboBox.setSelectedIndex(-1);
@@ -697,7 +727,37 @@ public class StudentGUI implements ActionListener{
         }
         
     }
-    
+    //Creating method to view elements of Grant Certificate 
+    public void gCV(boolean showHide1){
+        if(showHide1){
+            hide(true);
+            hL1.setText("Grant Certificate");
+            iDCPPL.setVisible(true);
+            iDCPPTF.setVisible(false);
+            cNGCL.setVisible(true);
+            cNGCTF.setVisible(true);
+            daysGCComboBox.setVisible(true);
+            monthsGCComboBox.setVisible(true);
+            yearsGCComboBox.setVisible(true);
+            dOEGCL.setVisible(true);
+            dPCPPTF.setVisible(false);
+            dPCPPL.setVisible(false);
+            book.setVisible(false);
+            iDGCTF.setVisible(true);
+            book2.setVisible(true);
+        }else{
+            hide(false);
+            hL.setText("");
+            iDCPPL.setVisible(false);
+            iDGCTF.setVisible(true);
+            cNGCL.setVisible(false);
+            cNGCTF.setVisible(false);
+            daysGCComboBox.setVisible(false);
+            monthsGCComboBox.setVisible(false);
+            yearsGCComboBox.setVisible(false);
+            dOEGCL.setVisible(false);
+        }
+    }
     
     //Main Method
     public static void main(String[] args){
@@ -712,15 +772,12 @@ public class StudentGUI implements ActionListener{
         sN = sNTF.getText().trim();
         
         // Get the selected date of birth from the JComboBoxes
-        String dayOfBirth = (dayComboBox.getSelectedItem() != null) ? dayComboBox.getSelectedItem().toString() : "";
-        String monthOfBirth = (monthComboBox.getSelectedItem() != null) ? monthComboBox.getSelectedItem().toString() : "";
-        String yearOfBirth = (yearComboBox.getSelectedItem() != null) ? yearComboBox.getSelectedItem().toString() : "";
-        System.out.println("Selected day of birth: " + dayOfBirth);
-        System.out.println("Selected month of birth: " + monthOfBirth);
-        System.out.println("Selected year of birth: " + yearOfBirth);
-
+        String dayOfBirth = (String) dayComboBox.getSelectedItem();
+        String monthOfBirth = (String) monthComboBox.getSelectedItem();
+        String yearOfBirth = (String) yearComboBox.getSelectedItem();
+        
         dOB = dayOfBirth + "-" + monthOfBirth + "-" + yearOfBirth;
-        System.out.println("Formatted date of birth: " + dOB);
+        
         cN = cNTF.getText().trim();
         cD = cDTF.getText().trim();
         tF = tFTF.getText().trim();
@@ -729,9 +786,9 @@ public class StudentGUI implements ActionListener{
         dP = dPTF.getText().trim();
         
         // Get the selected date of enrollment from the JComboBoxes
-        String dayOfEnrollment = (daysComboBox.getSelectedItem() != null) ? daysComboBox.getSelectedItem().toString() : "";
-        String monthOfEnrollment = (monthsComboBox.getSelectedItem() != null) ? monthsComboBox.getSelectedItem().toString() : "";
-        String yearOfEnrollment = (yearsComboBox.getSelectedItem() != null) ? yearsComboBox.getSelectedItem().toString() : "";
+        String dayOfEnrollment = (String) daysComboBox.getSelectedItem();
+        String monthOfEnrollment = (String) monthsComboBox.getSelectedItem();
+        String yearOfEnrollment = (String) yearsComboBox.getSelectedItem();
         
         dOE = dayOfEnrollment + "-" + monthOfEnrollment + "-" + yearOfEnrollment;
         
@@ -740,17 +797,28 @@ public class StudentGUI implements ActionListener{
         nOMA = nOMATF.getText().trim();
         
         // Get the selected date of dropout from the JComboBoxes
-        String dayOfDropout = (dayDODComboBox.getSelectedItem() != null) ? dayDODComboBox.getSelectedItem().toString() : "";
-        String monthOfDropout = (monthDODComboBox.getSelectedItem() != null) ? monthDODComboBox.getSelectedItem().toString() : "";
-        String yearOfDropout = (yearDODComboBox.getSelectedItem() != null) ? yearDODComboBox.getSelectedItem().toString() : "";
+        String dayOfDropout = (String) dayDODComboBox.getSelectedItem();
+        String monthOfDropout = (String) monthDODComboBox.getSelectedItem();
+        String yearOfDropout =(String) yearDODComboBox.getSelectedItem();
         
         dOD = dayOfDropout + "-" + monthOfDropout + "-" + yearOfDropout;
+        
+        String eIDNew = iDGCTF.getText().trim();
+        String courseNameNew= cNGCTF.getText().trim();
+        // Get selected values from the combo boxes for day, month, and year
+        String selectedDay = (String) daysGCComboBox.getSelectedItem();
+        String selectedMonth = (String) monthsGCComboBox.getSelectedItem(); 
+        String selectedYear = (String) yearsGCComboBox.getSelectedItem();   
+        
+        String dOENEW= selectedDay + "-" + selectedMonth + "-" + selectedYear;
+        
         boolean a; //Intializing boolean for toggleMenu
         boolean showHide;
         //For Switching between Regular Student and Dropout Student         
         if(toggleMenu.isSelected()){
-            a = true;
             
+            a = true;
+            clear();
             
             hL.setText("DROPOUT STUDENT");
             toggleMenu.setText("<html><font color='white' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Regular Student</font></html>");
@@ -790,8 +858,8 @@ public class StudentGUI implements ActionListener{
             
             
             a = false;
+            clear();
             
-            clearCB();
             hL.setText("REGULAR STUDENT");
             toggleMenu.setText("<html><font color='white' style='font-size: 20px;'>&#8644;</font><font color='red' style='font-size:13px;'>    Dropout Student</font></html>");
                     
@@ -831,10 +899,7 @@ public class StudentGUI implements ActionListener{
         }
            
         //For add Regular Student button   
-        if (e.getSource() == addR) {
-            System.out.println("Button is clicked");
-            
-            
+        if (e.getSource() == addR) {            
             if (iD.length() == 0 || dOB.length() == 0 || cN.length() == 0 || sN.length() == 0 || dOE.length() == 0 || cD.length() == 0 || tF.length() == 0 || nOM.length() == 0 || nOCH.length() == 0 ||dP.length() == 0 ) {
                 JOptionPane.showMessageDialog(newFrame, "Error: Empty Fields!", "Fill Up", JOptionPane.WARNING_MESSAGE);
             } else {
@@ -859,6 +924,7 @@ public class StudentGUI implements ActionListener{
                     JOptionPane.showMessageDialog(newFrame, "Error adding student: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+            clear();
         }
 
          
@@ -885,6 +951,7 @@ public class StudentGUI implements ActionListener{
                         JOptionPane.showMessageDialog(newFrame, "Only numbers are allowed in fields marked with *", "Numeric Inputs Required!", JOptionPane.WARNING_MESSAGE);   
              }   
           }
+          clear();
         }
         
         //For Book Button to Calculate Present Percentage 
@@ -910,7 +977,8 @@ public class StudentGUI implements ActionListener{
                                 JOptionPane.showMessageDialog(newFrame, regularStudent.presentPercentage(), "Attendance Grade", JOptionPane.INFORMATION_MESSAGE);
                                 studentFound = true;
                                 break;
-                            } else {                                    JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + enrollmentId + " does not belong to a Regular Student.", "Invalid Student", JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + enrollmentId + " does not belong to a Regular Student.", "Invalid Student", JOptionPane.WARNING_MESSAGE);
                                 studentFound = true;
                                 break;
                             }
@@ -926,25 +994,78 @@ public class StudentGUI implements ActionListener{
             }
         }
         
+        
+       //For Book Button for Grant Certificate 
+        // For Book Button for Grant Certificate
+    if (e.getSource() == book2) {
+        String enrollmentIdStr = eIDNew;
+        String courseNameStr = courseNameNew;
+        String dOEStr = dOENEW; // Assuming this is a valid date string
+    
+        if (enrollmentIdStr.isEmpty() || courseNameStr.isEmpty() || dOEStr.isEmpty()) {
+            JOptionPane.showMessageDialog(newFrame, "Please fill in all required fields.", "Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                int enrollmentId = Integer.parseInt(enrollmentIdStr);
+                
+                boolean studentFound = false;
+                for (Student student : arrList) {
+                    if (student instanceof Regular) {
+                        Regular regularStudent = (Regular) student;
+                        if (regularStudent.getEnrollmentID() == enrollmentId &&
+                            regularStudent.getCourseName().equalsIgnoreCase(courseNameStr) &&
+                            regularStudent.getDateOfBirth().equalsIgnoreCase(dOEStr)) {
+                            
+                            regularStudent.grantCertificate(courseNameStr, enrollmentId, dOEStr); // Call grantCertificate method
+                            
+                            studentFound = true;
+                            JOptionPane.showMessageDialog(newFrame, "Certificate granted to " + regularStudent.getStudentName(), "Certificate Granted", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+                        }
+                    }
+                }
+                
+                if (!studentFound) {
+                    JOptionPane.showMessageDialog(newFrame, "Regular student with provided details not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(newFrame, "Please enter a valid numeric Enrollment ID.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        clear(); // Assuming you want to clear fields after the action
+    }
+
+        //For Grant Certificate Button 
+        if (e.getSource() == gCB){
+            gCV(true);
+        }
+        
+        
         //For Clear Buttons 
-        if (e.getSource() == cButton) {
+        if (e.getSource() == cButton){
+            
+            clear();
             
         }
+        
+        if(e.getSource() == clear){
+            hide(true);
+
+        }
+        
+        
         
         // For Calculate Present Percentage Button    
         if (e.getSource() == cPPB) {
              cPPV(true);
                         
             
-        } else{
-             cPPV(false);
-            
-            
-        }
+        } 
         
         //For CloseP Button 
         if (e.getSource() == closeP){
              hide(false);
+             clear();
         }
         
              
@@ -969,8 +1090,10 @@ public class StudentGUI implements ActionListener{
                 System.out.println("\n\n");
                 System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
             }
+            clear();
         }
     }
 }
+
 
 
