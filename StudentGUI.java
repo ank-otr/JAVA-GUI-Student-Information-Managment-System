@@ -472,7 +472,7 @@ public class StudentGUI implements ActionListener{
         iDCPPL.setText("Enrollment ID:");
         iDCPPL.setFont(new Font("Monospaced", Font.BOLD,13));
         iDCPPL.setForeground(lC);
-        iDCPPL.setBounds(20,80,200,50);
+        iDCPPL.setBounds(80,80,200,50);
         
         iDCPPTF = new JTextField();
         iDCPPTF.setBounds(190, 90, 250, 25);
@@ -488,14 +488,14 @@ public class StudentGUI implements ActionListener{
         hL1.setFont(new Font("SERIF", Font.BOLD,22));
         hL1.setForeground(new Color(237,139,0));
         
-        hL1.setBounds(50,10,400,50); 
+        hL1.setBounds(100,10,400,50); 
         bPanel.add(hL1);
         
         dPCPPL= new JLabel();
         dPCPPL.setText("Days Present:");
         dPCPPL.setFont(new Font("Monospaced", Font.BOLD,13));
         dPCPPL.setForeground(lC);
-        dPCPPL.setBounds(20,160,200,50);
+        dPCPPL.setBounds(90,160,200,50);
         
         dPCPPTF = new JTextField();
         dPCPPTF.setBounds(190, 170, 250, 25);
@@ -539,7 +539,7 @@ public class StudentGUI implements ActionListener{
         cNGCL.setText("Course Name:");
         cNGCL.setFont(aC);
         cNGCL.setForeground(lC);
-        cNGCL.setBounds(20,130,200,50);
+        cNGCL.setBounds(97,130,200,50);
         cNGCL.setVisible(false);
         bPanel.add(cNGCL);
         
@@ -554,7 +554,7 @@ public class StudentGUI implements ActionListener{
         dOEGCL.setText("Date of Enrollment:");
         dOEGCL.setFont(aC);
         dOEGCL.setForeground(lC);
-        dOEGCL.setBounds(20,180,200,50);
+        dOEGCL.setBounds(42,180,200,50);
         dOEGCL.setVisible(false);
         bPanel.add(dOEGCL);
         
@@ -696,6 +696,7 @@ public class StudentGUI implements ActionListener{
          cNGCTF.setText("");
          iDPBTF.setText("");
          iDGCTF.setText("");
+         iDRSTF.setText("");
         
         //Clearing the combo boxes
         
@@ -754,11 +755,12 @@ public class StudentGUI implements ActionListener{
             monthsGCComboBox.setVisible(false);
             yearsGCComboBox.setVisible(false);
             dOEGCL.setVisible(false);
-
+            hL1.setBounds(100,10,400,50); 
             
         }else{
             hide(false);
             hL1.setText("");
+            hL1.setBounds(100,10,400,50); 
             iDCPPL.setVisible(false);
             iDCPPTF.setVisible(false);
             dPCPPL.setVisible(false);
@@ -773,6 +775,7 @@ public class StudentGUI implements ActionListener{
         if(showHide1){
             hide(true);
             hL1.setText("Grant Certificate");
+            hL1.setBounds(150,10,400,50); 
             iDCPPL.setVisible(true);
             iDCPPTF.setVisible(false);
             cNGCL.setVisible(true);
@@ -789,6 +792,7 @@ public class StudentGUI implements ActionListener{
         }else{
             hide(false);
             hL.setText("");
+            hL1.setBounds(100,10,400,50); 
             iDCPPL.setVisible(false);
             iDGCTF.setVisible(true);
             cNGCL.setVisible(false);
@@ -797,7 +801,7 @@ public class StudentGUI implements ActionListener{
             monthsGCComboBox.setVisible(false);
             yearsGCComboBox.setVisible(false);
             dOEGCL.setVisible(false);
-            
+            hL1.setBounds(100,10,400,50); 
         }
     }
     
@@ -805,6 +809,7 @@ public class StudentGUI implements ActionListener{
         if(showHide2){
             hide(true);
             hL1.setText("Pay Bills");
+            hL1.setBounds(200,10,400,50); 
             iDCPPL.setVisible(true);
             iDCPPTF.setVisible(false);
             cNGCL.setVisible(false);
@@ -826,6 +831,7 @@ public class StudentGUI implements ActionListener{
             iDCPPL.setVisible(false);
             iDPBTF.setVisible(false);
             pay.setVisible(false);
+            hL1.setBounds(100,10,400,50); 
         }
     }
     
@@ -833,6 +839,7 @@ public class StudentGUI implements ActionListener{
         if (showHide3){
             hide(true);
             hL1.setText("Remove Student");
+            hL1.setBounds(180,10,400,50); 
             iDCPPTF.setVisible(false);
             iDPBTF.setVisible(false);
             iDGCTF.setVisible(false);
@@ -846,6 +853,7 @@ public class StudentGUI implements ActionListener{
             hide(false);
             iDRSTF.setVisible(false);
             remove.setVisible(false);
+            hL1.setBounds(100,10,400,50); 
         }
     }
     
@@ -1164,43 +1172,43 @@ public class StudentGUI implements ActionListener{
             }
         }
         
-           if (e.getSource() == remove) {
-    String eIDRSStr = eIDRS; // Assuming eIDPB is a JTextField
-
-    if (eIDRSStr.isEmpty()) {
-        JOptionPane.showMessageDialog(newFrame, "Please fill in all required fields.", "Error", JOptionPane.WARNING_MESSAGE);
-    } else {
-        try {
-            int enrollmentId = Integer.parseInt(eIDRSStr);
-
-            boolean studentFound = false;
-            for (Student student : arrList) {
-                if (student instanceof Dropout) {
-                    Dropout dropoutStudent = (Dropout) student;
-                    if (dropoutStudent.getEnrollmentID() == enrollmentId) {
-                        if (dropoutStudent.getHasPaid()) { // Check if bills are cleared using the appropriate method
-                            int confirmation = JOptionPane.showConfirmDialog(newFrame, "Are you sure you want to remove this student?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
-                            if (confirmation == JOptionPane.YES_OPTION) {
-                                dropoutStudent.removeStudent();
-                                studentFound = true;
-                                JOptionPane.showMessageDialog(newFrame, "Student Has Been Removed", "Remove Confirmed", JOptionPane.INFORMATION_MESSAGE);
+        if (e.getSource() == remove) {
+            String eIDRSStr = eIDRS; // Assuming eIDPB is a JTextField
+        
+            if (eIDRSStr.isEmpty()) {
+                JOptionPane.showMessageDialog(newFrame, "Please fill in all required fields.", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    int enrollmentId = Integer.parseInt(eIDRSStr);
+        
+                    boolean studentFound = false;
+                    for (Student student : arrList) {
+                        if (student instanceof Dropout) {
+                            Dropout dropoutStudent = (Dropout) student;
+                            if (dropoutStudent.getEnrollmentID() == enrollmentId) {
+                                if (dropoutStudent.getHasPaid()) { // Check if bills are cleared using the appropriate method
+                                    int confirmation = JOptionPane.showConfirmDialog(newFrame, "Are you sure you want to remove this student?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
+                                    if (confirmation == JOptionPane.YES_OPTION) {
+                                        dropoutStudent.removeStudent();
+                                        studentFound = true;
+                                        JOptionPane.showMessageDialog(newFrame, "Student Has Been Removed", "Remove Confirmed", JOptionPane.INFORMATION_MESSAGE);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(newFrame, "All bills are not cleared", "Bills Not Cleared", JOptionPane.WARNING_MESSAGE);
+                                }
+                                break;
                             }
-                        } else {
-                            JOptionPane.showMessageDialog(newFrame, "All bills are not cleared", "Bills Not Cleared", JOptionPane.WARNING_MESSAGE);
                         }
-                        break;
                     }
+        
+                    if (!studentFound) {
+                        JOptionPane.showMessageDialog(newFrame, "Dropout student with provided details not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(newFrame, "Please enter a valid numeric Enrollment ID.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 }
             }
-
-            if (!studentFound) {
-                JOptionPane.showMessageDialog(newFrame, "Dropout student with provided details not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(newFrame, "Please enter a valid numeric Enrollment ID.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }
-    }
-}
 
 
 
