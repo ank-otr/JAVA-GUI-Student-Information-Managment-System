@@ -8,9 +8,9 @@ public class StudentGUI implements ActionListener{
     
     private JLabel hL, iDL, sNL, dOBL,cNL, cDL, tFL, nOML, nOCHL, dPL, dOEL, nORML, nOMAL, dODL, iDCPPL, dPCPPL, hL1, cNGCL, dOEGCL;
     
-    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF, cNGCTF, iDGCTF, iDPBTF;
+    private JTextField iDTF, sNTF, cNTF, cDTF, tFTF , nOMTF, nOCHTF, dPTF, nORMTF, nOMATF, iDCPPTF, dPCPPTF, cNGCTF, iDGCTF, iDPBTF, iDRSTF;
     
-    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clear,book, book2, pay;
+    private JButton addR, cPPB, gCB, dButton, cButton, addD, pBB, rSB, closeP, clear,book, book2, pay,remove;
     
     private JToggleButton toggleMenu;
     
@@ -48,6 +48,7 @@ public class StudentGUI implements ActionListener{
     private String monthOfDropout;
     private String yearOfDropout;
     private String dOEGC;
+    private String eIDPB;
     
     
     
@@ -617,6 +618,20 @@ public class StudentGUI implements ActionListener{
         pay.setVisible(false);
         bPanel.add(pay);
         
+        iDRSTF = new JTextField();
+        iDRSTF.setBounds(190, 90, 250, 25);
+        iDRSTF.setBackground(new Color(190,195,198));
+        iDRSTF.setFont(new Font("Monospaced", Font.BOLD,20));
+        bPanel.add(iDRSTF);
+        
+        remove = new JButton();
+        remove.setText("Remove");
+        remove.setForeground(new Color(66,133,244));
+        remove.setBounds(280, 250, 100,50);
+        remove.addActionListener(this);
+        remove.setVisible(false);
+        bPanel.add(remove);
+        
         // Adding a Window Listener to the JFrame newFrame to handle the window closing event
         newFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent wc) {
@@ -814,6 +829,26 @@ public class StudentGUI implements ActionListener{
         }
     }
     
+    public void rSV(boolean showHide3){
+        if (showHide3){
+            hide(true);
+            hL1.setText("Remove Student");
+            iDCPPTF.setVisible(false);
+            iDPBTF.setVisible(false);
+            iDGCTF.setVisible(false);
+            dPCPPTF.setVisible(false);
+            dPCPPL.setVisible(false);
+            iDRSTF.setVisible(true);
+            remove.setVisible(true);
+            pay.setVisible(false);
+        }
+        else{
+            hide(false);
+            iDRSTF.setVisible(false);
+            remove.setVisible(false);
+        }
+    }
+    
     //Main Method
     public static void main(String[] args){
         StudentGUI gui = new StudentGUI();
@@ -868,6 +903,10 @@ public class StudentGUI implements ActionListener{
         String selectedYear = (String) yearsGCComboBox.getSelectedItem();   
         
         String dOENEW= selectedDay + "-" + selectedMonth + "-" + selectedYear;
+        
+        String eIDPB = iDPBTF.getText().trim();
+        
+        String eIDRS = iDRSTF.getText().trim();
         
         boolean a; //Intializing boolean for toggleMenu
         boolean showHide;
@@ -1054,45 +1093,118 @@ public class StudentGUI implements ActionListener{
         }
         
         
-       //For Book Button for Grant Certificate 
         // For Book Button for Grant Certificate
-    if (e.getSource() == book2) {
-        String enrollmentIdStr = eIDNew;
-        String courseNameStr = courseNameNew;
-        String dOEStr = dOENEW; // Assuming this is a valid date string
-    
-        if (enrollmentIdStr.isEmpty() || courseNameStr.isEmpty() || dOEStr.isEmpty()) {
-            JOptionPane.showMessageDialog(newFrame, "Please fill in all required fields.", "Error", JOptionPane.WARNING_MESSAGE);
-        } else {
-            try {
-                int enrollmentId = Integer.parseInt(enrollmentIdStr);
-                
-                boolean studentFound = false;
-                for (Student student : arrList) {
-                    if (student instanceof Regular) {
-                        Regular regularStudent = (Regular) student;
-                        if (regularStudent.getEnrollmentID() == enrollmentId &&
-                            regularStudent.getCourseName().equalsIgnoreCase(courseNameStr) &&
-                            regularStudent.getDateOfBirth().equalsIgnoreCase(dOEStr)) {
-                            
-                            regularStudent.grantCertificate(courseNameStr, enrollmentId, dOEStr); // Call grantCertificate method
-                            
-                            studentFound = true;
-                            JOptionPane.showMessageDialog(newFrame, "Certificate granted to " + regularStudent.getStudentName(), "Certificate Granted", JOptionPane.INFORMATION_MESSAGE);
-                            break;
+        if (e.getSource() == book2) {
+            String enrollmentIdStr = eIDNew;
+            String courseNameStr = courseNameNew;
+            String dOEStr = dOENEW; // Assuming this is a valid date string
+        
+            if (enrollmentIdStr.isEmpty() || courseNameStr.isEmpty() || dOEStr.isEmpty()) {
+                JOptionPane.showMessageDialog(newFrame, "Please fill in all required fields.", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    int enrollmentId = Integer.parseInt(enrollmentIdStr);
+                    
+                    boolean studentFound = false;
+                    for (Student student : arrList) {
+                        if (student instanceof Regular) {
+                            Regular regularStudent = (Regular) student;
+                            if (regularStudent.getEnrollmentID() == enrollmentId &&
+                                regularStudent.getCourseName().equalsIgnoreCase(courseNameStr) &&
+                                regularStudent.getDateOfBirth().equalsIgnoreCase(dOEStr)) {
+                                
+                                regularStudent.grantCertificate(courseNameStr, enrollmentId, dOEStr); // Call grantCertificate method
+                                
+                                studentFound = true;
+                                JOptionPane.showMessageDialog(newFrame, "Certificate granted to " + regularStudent.getStudentName(), "Certificate Granted", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                            }
                         }
                     }
+                    
+                    if (!studentFound) {
+                        JOptionPane.showMessageDialog(newFrame, "Regular student with provided details not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(newFrame, "Please enter a valid numeric Enrollment ID.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 }
-                
-                if (!studentFound) {
-                    JOptionPane.showMessageDialog(newFrame, "Regular student with provided details not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
+            }
+            clear(); // Assuming you want to clear fields after the action
+        }
+    
+        
+        if (e.getSource() == pay) {
+            String eIDPBStr = eIDPB; // Assuming eIDPB is a JTextField
+        
+            if (eIDPBStr.isEmpty()) {
+                JOptionPane.showMessageDialog(newFrame, "Please fill in all required fields.", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    int enrollmentId = Integer.parseInt(eIDPBStr);
+        
+                    boolean studentFound = false;
+                    for (Student student : arrList) {
+                        if (student instanceof Dropout) {
+                            Dropout dropoutStudent = (Dropout) student;
+                            if (dropoutStudent.getEnrollmentID() == enrollmentId) {
+                                dropoutStudent.billsPayable();
+                                studentFound = true;
+                                JOptionPane.showMessageDialog(newFrame, "Remaining amount for " + dropoutStudent.getStudentName() + ": " + dropoutStudent.getRemainingAmount(), "Bills Payable", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                            }
+                        }
+                    }
+        
+                    if (!studentFound) {
+                        JOptionPane.showMessageDialog(newFrame, "Dropout student with provided details not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(newFrame, "Please enter a valid numeric Enrollment ID.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(newFrame, "Please enter a valid numeric Enrollment ID.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
         }
-        clear(); // Assuming you want to clear fields after the action
+        
+           if (e.getSource() == remove) {
+    String eIDRSStr = eIDRS; // Assuming eIDPB is a JTextField
+
+    if (eIDRSStr.isEmpty()) {
+        JOptionPane.showMessageDialog(newFrame, "Please fill in all required fields.", "Error", JOptionPane.WARNING_MESSAGE);
+    } else {
+        try {
+            int enrollmentId = Integer.parseInt(eIDRSStr);
+
+            boolean studentFound = false;
+            for (Student student : arrList) {
+                if (student instanceof Dropout) {
+                    Dropout dropoutStudent = (Dropout) student;
+                    if (dropoutStudent.getEnrollmentID() == enrollmentId) {
+                        if (dropoutStudent.getHasPaid()) { // Check if bills are cleared using the appropriate method
+                            int confirmation = JOptionPane.showConfirmDialog(newFrame, "Are you sure you want to remove this student?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
+                            if (confirmation == JOptionPane.YES_OPTION) {
+                                dropoutStudent.removeStudent();
+                                studentFound = true;
+                                JOptionPane.showMessageDialog(newFrame, "Student Has Been Removed", "Remove Confirmed", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(newFrame, "All bills are not cleared", "Bills Not Cleared", JOptionPane.WARNING_MESSAGE);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (!studentFound) {
+                JOptionPane.showMessageDialog(newFrame, "Dropout student with provided details not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(newFrame, "Please enter a valid numeric Enrollment ID.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
     }
+}
+
+
+
+        
 
         //For Grant Certificate Button 
         if (e.getSource() == gCB){
@@ -1130,6 +1242,11 @@ public class StudentGUI implements ActionListener{
              clear();
         }
         
+        if(e.getSource() == rSB){
+            rSV(true);
+            
+            
+        }
              
         // For Display Button
         if (e.getSource() == dButton) {

@@ -67,7 +67,7 @@ public class Dropout extends Student {
     
         remainingAmount = (super.getCourseDuration() - numOfMonthsAttended) * (super.getTuitionFee()/super.getCourseDuration());
         hasPaid = true;
-        System.out.println(remainingAmount); 
+        
          
     
     
@@ -99,9 +99,6 @@ public class Dropout extends Student {
     //display method
      public void display(){
     super.display(); // get basic student information from the Student class
-    
-        
-    
     System.out.println("\n" +"Number of Remaining Modules: " + numOfRemainingModules + "\n" +
                          "Number of Months Attended: " + numOfMonthsAttended + "\n" +
                          "Date of Drop Out: " + dateOfDropout + "\n"+
