@@ -45,6 +45,7 @@ public class Regular extends Student {
         return isGrantedScholarship;
     }
     
+    
     //mutator method for isGrantedScholarship 
     public void setIsGrantedScholarship(boolean isGrantedScholarship){
             this.isGrantedScholarship = isGrantedScholarship;

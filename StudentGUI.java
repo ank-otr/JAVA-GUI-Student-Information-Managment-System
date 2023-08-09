@@ -476,7 +476,7 @@ public class StudentGUI implements ActionListener{
         
         iDCPPTF = new JTextField();
         iDCPPTF.setBounds(190, 90, 250, 25);
-        iDCPPTF.setBackground(new Color(190,195,198));
+        iDCPPTF.setBackground(Color.RED);
         iDCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
         bPanel.add(iDCPPTF);
@@ -499,7 +499,7 @@ public class StudentGUI implements ActionListener{
         
         dPCPPTF = new JTextField();
         dPCPPTF.setBounds(190, 170, 250, 25);
-        dPCPPTF.setBackground(new Color(190,195,198));
+        dPCPPTF.setBackground(Color.RED);
         dPCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
         bPanel.add(dPCPPTF);
@@ -519,7 +519,7 @@ public class StudentGUI implements ActionListener{
         
         //Creating Book button for Calulate Present Pecentage
         book = new JButton();
-        book.setText("Book");
+        book.setText("Calculate");
         book.setForeground(new Color(66,133,244));
         book.setBounds(280, 250, 100,50);
         book.addActionListener(this);
@@ -592,7 +592,7 @@ public class StudentGUI implements ActionListener{
         iDGCTF.setFont(new Font("Monospaced", Font.BOLD,20));
         bPanel.add(iDGCTF);
         
-        bPanel.add(iDCPPTF);
+        
         
         iDPBTF = new JTextField();
         iDPBTF.setBounds(190, 90, 250, 25);
@@ -600,7 +600,7 @@ public class StudentGUI implements ActionListener{
         iDPBTF.setFont(new Font("Monospaced", Font.BOLD,20));
         bPanel.add(iDPBTF);
         
-        bPanel.add(iDCPPTF);
+        bPanel.add(iDPBTF);
         //Creating Book button for Calulate Present Pecentage
         book2 = new JButton();
         book2.setText("Book");
@@ -1064,7 +1064,7 @@ public class StudentGUI implements ActionListener{
             String daysPresentStr = dPCP;
             
             
-            if (enrollmentIdStr.isEmpty() || daysPresentStr.isEmpty()) {
+            if (enrollmentIdStr.isEmpty() || daysPresentStr.isEmpty())  {
                 JOptionPane.showMessageDialog(newFrame, "Please fill in both Enrollment ID and Days Present.", "Error", JOptionPane.WARNING_MESSAGE);
             } else {
                 try {
@@ -1073,23 +1073,26 @@ public class StudentGUI implements ActionListener{
         
                     boolean studentFound = false;
                     for (Student student : arrList) {
-                        if (student.getEnrollmentID() == enrollmentId) {
+                        
                             if (student instanceof Regular) {
                                 Regular regularStudent = (Regular)student;
+                                if (regularStudent.getEnrollmentID() == enrollmentId || regularStudent.getDaysPresent() == daysPresent) {
                                 regularStudent.setDaysPresent(daysPresent); // Set the days present for the student
                                 
                                 String attendanceGrade = regularStudent.presentPercentage(); // Calculate the present percentage and get the attendance grade
                                 String message = "Attendance Grade for Enrollment ID " + enrollmentId + ": " + attendanceGrade;
                                 JOptionPane.showMessageDialog(newFrame, regularStudent.presentPercentage(), "Attendance Grade", JOptionPane.INFORMATION_MESSAGE);
+                                regularStudent.presentPercentage();
                                 studentFound = true;
+                            }
                                 break;
                             } else {
                                 JOptionPane.showMessageDialog(newFrame, "Enrollment ID " + enrollmentId + " does not belong to a Regular Student.", "Invalid Student", JOptionPane.WARNING_MESSAGE);
                                 studentFound = true;
                                 break;
                             }
+                        
                         }
-                    }
         
                     if (!studentFound) {
                         JOptionPane.showMessageDialog(newFrame, "Student with Enrollment ID " + enrollmentId + " not found.", "Student Not Found", JOptionPane.WARNING_MESSAGE);
@@ -1122,9 +1125,14 @@ public class StudentGUI implements ActionListener{
                                 regularStudent.getDateOfBirth().equalsIgnoreCase(dOEStr)) {
                                 
                                 regularStudent.grantCertificate(courseNameStr, enrollmentId, dOEStr); // Call grantCertificate method
-                                
+
                                 studentFound = true;
-                                JOptionPane.showMessageDialog(newFrame, "Certificate granted to " + regularStudent.getStudentName(), "Certificate Granted", JOptionPane.INFORMATION_MESSAGE);
+                                if(regularStudent.getIsGrantedScholarship()){
+                                    JOptionPane.showMessageDialog(newFrame,"The Student " + regularStudent.getStudentName()+ " has granted Scolarship."+"Graduated from" +regularStudent.getCourseName() + " with Enrollment ID:" +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate  Granted", JOptionPane.INFORMATION_MESSAGE);
+                                 
+                                    } else{
+                                    JOptionPane.showMessageDialog(newFrame, "The Student " + regularStudent.getStudentName()+" has Graduated from" +regularStudent.getCourseName() + " with Enrollment ID:" +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate not Granted", JOptionPane.INFORMATION_MESSAGE);
+                                }
                                 break;
                             }
                         }
