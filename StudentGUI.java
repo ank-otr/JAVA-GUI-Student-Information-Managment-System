@@ -700,23 +700,23 @@ public class StudentGUI implements ActionListener{
         
         //Clearing the combo boxes
         
-        dayComboBox.setSelectedIndex(-1);
-        monthComboBox.setSelectedIndex(-1);
-        yearComboBox.setSelectedIndex(-1);
+        dayComboBox.setSelectedIndex(0);
+        monthComboBox.setSelectedIndex(0);
+        yearComboBox.setSelectedIndex(0);
         
         
-        daysComboBox.setSelectedIndex(-1);
-        monthsComboBox.setSelectedIndex(-1);
-        yearsComboBox.setSelectedIndex(-1);
+        daysComboBox.setSelectedIndex(0);
+        monthsComboBox.setSelectedIndex(0);
+        yearsComboBox.setSelectedIndex(0);
         
         
-        dayDODComboBox.setSelectedIndex(-1);
-        monthDODComboBox.setSelectedIndex(-1);
-        yearDODComboBox.setSelectedIndex(-1);
+        dayDODComboBox.setSelectedIndex(0);
+        monthDODComboBox.setSelectedIndex(0);
+        yearDODComboBox.setSelectedIndex(0);
         
-        daysGCComboBox.setSelectedIndex(-1);
-        monthsGCComboBox.setSelectedIndex(-1);
-        yearsGCComboBox.setSelectedIndex(-1);
+        daysGCComboBox.setSelectedIndex(0);
+        monthsGCComboBox.setSelectedIndex(0);
+        yearsGCComboBox.setSelectedIndex(0);
     }
     
     public void hide(boolean showHide){
