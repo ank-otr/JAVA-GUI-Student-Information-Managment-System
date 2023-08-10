@@ -1128,7 +1128,7 @@ public class StudentGUI implements ActionListener{
 
                                 studentFound = true;
                                 if(regularStudent.getIsGrantedScholarship()){
-                                    JOptionPane.showMessageDialog(newFrame,"The Student " + regularStudent.getStudentName()+ " has granted Scolarship."+"Graduated from" +regularStudent.getCourseName() + " with Enrollment ID:" +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate  Granted", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(newFrame,"The Student " + regularStudent.getStudentName()+ " has granted Scolarship."+" Graduated from" +regularStudent.getCourseName() + " with Enrollment ID:" +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate  Granted", JOptionPane.INFORMATION_MESSAGE);
                                  
                                     } else{
                                     JOptionPane.showMessageDialog(newFrame, "The Student " + regularStudent.getStudentName()+" has Graduated from" +regularStudent.getCourseName() + " with Enrollment ID:" +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate not Granted", JOptionPane.INFORMATION_MESSAGE);
