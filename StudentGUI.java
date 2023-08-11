@@ -476,7 +476,7 @@ public class StudentGUI implements ActionListener{
         
         iDCPPTF = new JTextField();
         iDCPPTF.setBounds(190, 90, 250, 25);
-        iDCPPTF.setBackground(Color.RED);
+        iDCPPTF.setBackground(new Color(190,195,198));
         iDCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
         bPanel.add(iDCPPTF);
@@ -499,7 +499,7 @@ public class StudentGUI implements ActionListener{
         
         dPCPPTF = new JTextField();
         dPCPPTF.setBounds(190, 170, 250, 25);
-        dPCPPTF.setBackground(Color.RED);
+        dPCPPTF.setBackground(new Color(190,195,198));
         dPCPPTF.setFont(new Font("Monospaced", Font.BOLD,20));
         
         bPanel.add(dPCPPTF);
@@ -1128,7 +1128,7 @@ public class StudentGUI implements ActionListener{
 
                                 studentFound = true;
                                 if(regularStudent.getIsGrantedScholarship()){
-                                    JOptionPane.showMessageDialog(newFrame,"The Student " + regularStudent.getStudentName()+ " has granted Scolarship."+" Graduated from" +regularStudent.getCourseName() + " with Enrollment ID:" +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate  Granted", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(newFrame,"The Student " + regularStudent.getStudentName()+ " has granted Scolarship."+" Graduated from " +regularStudent.getCourseName() + " with Enrollment ID: " +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate  Granted", JOptionPane.INFORMATION_MESSAGE);
                                  
                                     } else{
                                     JOptionPane.showMessageDialog(newFrame, "The Student " + regularStudent.getStudentName()+" has Graduated from" +regularStudent.getCourseName() + " with Enrollment ID:" +regularStudent.getEnrollmentID() + " and Date Of Enrollment: " + regularStudent.getDateOfEnrollment(), "Certificate not Granted", JOptionPane.INFORMATION_MESSAGE);
